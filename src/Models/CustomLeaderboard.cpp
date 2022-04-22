@@ -24,7 +24,7 @@ namespace LeaderboardCore::Models {
         m_LeaderboardViewController->get_transform()->set_parent(leaderboardViewController->get_transform());
     }
 
-    void CustomLeaderboard::Hide(FloatingScreen panelScreen) {
+    void CustomLeaderboard::Hide(FloatingScreen* panelScreen) {
         if (panelScreen != nullptr) {
             // TODO: SetRootViewController (or the temp. workaround)
         } else {

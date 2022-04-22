@@ -4,7 +4,7 @@
 #include "shared/CustomLeaderboard.hpp"
 
 namespace LeaderboardCore::Interfaces {
-    class INotifyLeaderboardSet{
+    class INotifyLeaderboardChange {
     public:
         void OnLeaderboardChange(std::map<CustomLeaderboard> customLeaderboards);
     };

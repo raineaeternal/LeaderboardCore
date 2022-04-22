@@ -12,6 +12,11 @@
       "version": "^0.22.0",
       "id": "codegen",
       "downloadIfMissing": "https://github.com/sc2ad/BeatSaber-Quest-Codegen/releases/download/v0.22.0/Codegen.qmod"
+    },
+    {
+      "version": "^0.13.5",
+      "id": "questui",
+      "downloadIfMissing": "https://github.com/darknight1050/questui/releases/download/v0.13.5/QuestUI.qmod"
     }
   ],
   "modFiles": [

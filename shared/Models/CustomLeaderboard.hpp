@@ -21,6 +21,6 @@ namespace LeaderboardCore::Models {
         FastVector3 leaderboardPos, 
         PlatformLeaderboardViewController* leaderboardViewController);
 
-        void Hide(FloatingScreen panelScreen);
+        void Hide(FloatingScreen* panelScreen);
     };
 }
