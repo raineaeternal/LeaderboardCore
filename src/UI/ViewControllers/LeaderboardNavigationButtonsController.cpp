@@ -11,7 +11,7 @@ namespace LeaderboardCore::UI::ViewControllers {
 
     }
 
-    void LeaderboardNavigationButtonsController::OnLeaderboardChanged(std::map<CustomLeaderboard> customLeaderboards) {
+    void LeaderboardNavigationButtonsController::OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard>& customLeaderboards) {
 
     }
 

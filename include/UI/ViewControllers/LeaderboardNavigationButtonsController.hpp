@@ -23,9 +23,7 @@ using namespace GlobalNamespace;
 #include "Models/CustomLeaderboard.hpp"
 using namespace LeaderboardCore;
 
-#include <map>
-
-
+#include <vector>
 
 namespace LeaderboardCore::UI::ViewControllers {
     class LeaderboardNavigationButtonsController {
@@ -38,7 +36,7 @@ namespace LeaderboardCore::UI::ViewControllers {
 
         // void OnScoreSaberActivated(); /// TODO: Remove if ScoreSaber decides to play nice
 
-        void OnLeaderboardChanged(std::map<CustomLeaderboard> customLeaderboards);
+        void OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard>& customLeaderboards);
 
         void OnLeaderboardSet(IDifficultyBeatmap* diff);
         

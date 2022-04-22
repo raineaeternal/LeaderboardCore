@@ -1,9 +1,10 @@
 #include "shared/CustomLeaderboardManager.hpp"
 #include "shared/Models/CustomLeaderboard.hpp"
+#include <vector>
 
 namespace LeaderboardCore {
-    CustomLeaderboardManager::m_notifyCustomLeaderboardChanges;
-    CustomLeaderboardManager::m_customLeaderboards;
+    std::vector<INotifyLeaderboardChange*> CustomLeaderboardManager::m_notifyCustomLeaderboardChanges;
+    std::vector<CustomLeaderboard*> CustomLeaderboardManager::m_customLeaderboards;
 
     CustomLeaderboardManager::Register(CustomLeaderboard* customLeaderboard) {
         if (!customLeaderboards->Contains(m_customLeaderboards)) {
