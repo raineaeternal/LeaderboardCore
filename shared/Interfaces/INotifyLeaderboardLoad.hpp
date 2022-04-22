@@ -2,6 +2,7 @@
 
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardLoad {
-        void OnLeaderboardLoaded(bool loaded);
+    public:
+        virtual void OnLeaderboardLoaded(bool loaded) = 0;
     };
 }

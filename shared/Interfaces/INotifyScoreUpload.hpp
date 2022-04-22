@@ -3,6 +3,6 @@
 namespace LeaderboardCore::Interfaces {
     class INotifyScoreUpload {
     public:
-        void OnScoreUploaded();
+        virtual void OnScoreUploaded() = 0;
     };
 }

@@ -2,6 +2,7 @@
 
 namespace LeaderboardCore::Interfaces {
     class INotifyScoreSaberActive {
-        void OnScoreSaberActivated();
+    public:
+        virtual void OnScoreSaberActivated() = 0;
     };
 }
