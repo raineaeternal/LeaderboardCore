@@ -5,6 +5,6 @@
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardSet{
     public:
-        void OnLeaderboardSet(IDifficultyBeatmap diff);
+        void OnLeaderboardSet(IDifficultyBeatmap* diff);
     };
 }

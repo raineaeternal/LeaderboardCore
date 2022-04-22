@@ -1,4 +1,7 @@
 #include "main.hpp"
+#include "include/Hooks/LeaderboardHook.hpp"
+#include "custom-types/shared/register.hpp"
+#include "questui/shared/QuestUI.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -29,8 +32,10 @@ extern "C" void setup(ModInfo& info) {
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     il2cpp_functions::Init();
+    custom_types::Register::AutoRegister();
+    QuestUI::Init();
 
     getLogger().info("Installing hooks...");
-    // Install our hooks (none defined yet)
+    InstallHook();
     getLogger().info("Installed all hooks!");
 }
