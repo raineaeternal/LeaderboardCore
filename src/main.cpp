@@ -17,7 +17,8 @@ Logger& getLogger() {
 
 // Called at the early stages of game loading
 extern "C" void setup(ModInfo& info) {
-    info.id = MOD_ID;
+    std::string MODID = "LeaderboardCore"; 
+    info.id = MODID;
     info.version = VERSION;
     modInfo = info;
 	

@@ -1,19 +1,25 @@
 {
-	"$schema": "https://raw.githubusercontent.com/Lauriethefish/QuestPatcher.QMod/main/QuestPatcher.QMod/Resources/qmod.schema.json",
-	"_QPVersion": "0.1.1",
-	"name": "LeaderboardCore",
-	"id": "leaderboardcore",
-	"author": "Raine & metal_marmott",
-	"version": "0.1.0",
-	"packageId": "com.beatgames.beatsaber",
-	"packageVersion": "1.17.1",
-	"description": "",
-	"dependencies": [],
-	"modFiles": [
-		"libleaderboardcore.so"
-	],
-	"libraryFiles": [
-		"libbeatsaber-hook_2_3_2.so"
-	],
-	"fileCopies": []
+  "_QPVersion": "0.1.1",
+  "name": "LeaderboardCore",
+  "id": "leaderboardcore",
+  "author": "Raine, Polly51104, Pink",
+  "version": "0.1.0",
+  "packageId": "com.beatgames.beatsaber",
+  "packageVersion": "1.21.0",
+  "description": "Adds the capability to add custom leaderboards to Beat Saber with ease!",
+  "dependencies": [
+    {
+      "version": "^0.22.0",
+      "id": "codegen",
+      "downloadIfMissing": "https://github.com/sc2ad/BeatSaber-Quest-Codegen/releases/download/v0.22.0/Codegen.qmod"
+    }
+  ],
+  "modFiles": [
+    "libLeaderboardCore.so"
+  ],
+  "libraryFiles": [
+    "libbeatsaber-hook_3_8_1.so"
+  ],
+  "fileCopies": [],
+  "copyExtensions": []
 }

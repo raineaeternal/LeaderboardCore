@@ -1,0 +1,15 @@
+{
+  "_QPVersion": "0.1.1",
+  "name": "${mod_name}",
+  "id": "${mod_id}",
+  "author": "Raine, Polly51104, Pink",
+  "version": "${version}",
+  "packageId": "com.beatgames.beatsaber",
+  "packageVersion": "1.21.0",
+  "description": "Adds the capability to add custom leaderboards to Beat Saber with ease!",
+  "dependencies": [],
+  "modFiles": [],
+  "libraryFiles": [],
+  "fileCopies": [],
+  "copyExtensions": []
+}
