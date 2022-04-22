@@ -6,6 +6,6 @@
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardChange {
     public:
-        void OnLeaderboardChange(std::map<CustomLeaderboard> customLeaderboards);
+        virtual void OnLeaderboardChange(std::map<CustomLeaderboard> customLeaderboards) = 0;
     };
 }
