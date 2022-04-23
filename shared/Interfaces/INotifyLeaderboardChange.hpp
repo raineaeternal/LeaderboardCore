@@ -1,11 +1,11 @@
 #pragma once
 
 #include <map>
-#include "shared/CustomLeaderboard.hpp"
+#include "shared/Models/CustomLeaderboard.hpp"
 
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardChange {
     public:
-        virtual void OnLeaderboardChange(std::map<CustomLeaderboard> customLeaderboards) = 0;
+        virtual void OnLeaderboardChange(std::vector<LeaderboardCore::Models::CustomLeaderboard*> customLeaderboards);
     };
 }

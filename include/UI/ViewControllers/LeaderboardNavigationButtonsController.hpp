@@ -46,7 +46,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         UnityEngine::Transform* m_containerTransform;
         Sombrero::FastVector3 m_containerPos;
         IPreviewBeatmapLevel* m_selectedLevel;
-        std::map<Models::CustomLeaderboard*> m_customLeaderboards;
+        std::vector<Models::CustomLeaderboard*> m_customLeaderboards;
         int m_currentIndex;
         Models::CustomLeaderboard* m_customLeaderboard;    
 
