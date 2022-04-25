@@ -2,6 +2,8 @@
 
 #include "GlobalNamespace/IDifficultyBeatmap.hpp"
 
+DEFINE_TYPE(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController)
+
 namespace LeaderboardCore::UI::ViewControllers {
     void LeaderboardNavigationButtonsController::OnEnable() {
 
