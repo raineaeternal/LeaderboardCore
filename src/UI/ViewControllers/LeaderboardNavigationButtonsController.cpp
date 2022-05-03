@@ -9,20 +9,45 @@ namespace LeaderboardCore::UI::ViewControllers {
 
     }
 
+    void LeaderboardNavigationButtonsController::AddLeaderboardSet(INotifyLeaderboardSet *interface) {
+        leaderboardSetList.push_back(interface);
+    }
+    void LeaderboardNavigationButtonsController::AddLeaderboardChange(INotifyLeaderboardChange *interface) {
+        leaderboardChangeList.push_back(interface);
+    }
+    void LeaderboardNavigationButtonsController::AddLeaderboardLoad(INotifyLeaderboardLoad *interface) {
+        leaderboardLoadList.push_back(interface);
+    }
+    void LeaderboardNavigationButtonsController::AddScoreSaberActivated(INotifyScoreSaberActive *interface) {
+        scoresaberActiveList.push_back(interface);
+    }
+
+    void LeaderboardNavigationButtonsController::OnScoreSaberActivated() {
+        for(auto interface : scoresaberActiveList) {
+            interface->OnScoreSaberActivated();
+        }
+    }
+
     void LeaderboardNavigationButtonsController::OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
 
     }
 
-    void LeaderboardNavigationButtonsController::OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard>& customLeaderboards) {
-
+    void LeaderboardNavigationButtonsController::OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard*>& customLeaderboards) {
+        for(auto instance : leaderboardChangeList) {
+            instance->OnLeaderboardChange(customLeaderboards);
+        }
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardLoaded(bool loaded) {
-
+        for(auto interface : leaderboardLoadList) {
+            interface->OnLeaderboardLoaded(loaded);
+        }
     }
     
     void LeaderboardNavigationButtonsController::OnLeaderboardSet(IDifficultyBeatmap* diff) {
-
+        for(auto interface : leaderboardSetList) {
+            interface->OnLeaderboardSet(diff);
+        }
     }
 
     void LeaderboardNavigationButtonsController::YeetDefault() {
