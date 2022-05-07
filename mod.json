@@ -2,12 +2,17 @@
   "_QPVersion": "0.1.1",
   "name": "LeaderboardCore",
   "id": "leaderboardcore",
-  "author": "Raine, Polly51104, Pink",
+  "author": "Raine, Polly51104, Christoffyw",
   "version": "0.1.0",
   "packageId": "com.beatgames.beatsaber",
   "packageVersion": "1.21.0",
   "description": "Adds the capability to add custom leaderboards to Beat Saber with ease!",
   "dependencies": [
+    {
+      "version": "^0.15.9",
+      "id": "custom-types",
+      "downloadIfMissing": "https://github.com/sc2ad/Il2CppQuestTypePatching/releases/download/v0.15.9/CustomTypes.qmod"
+    },
     {
       "version": "^0.22.0",
       "id": "codegen",
@@ -23,7 +28,7 @@
     "libLeaderboardCore.so"
   ],
   "libraryFiles": [
-    "libbeatsaber-hook_3_8_1.so"
+    "libbeatsaber-hook_3_8_2.so"
   ],
   "fileCopies": [],
   "copyExtensions": []
