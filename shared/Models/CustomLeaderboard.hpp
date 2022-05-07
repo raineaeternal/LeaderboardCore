@@ -3,7 +3,10 @@
 #include "UnityEngine/Vector3.hpp"
 
 #include "GlobalNamespace/PlatformLeaderboardViewController.hpp"
+#include "GlobalNamespace/SharedCoroutineStarter.hpp"
 using namespace GlobalNamespace;
+
+#include "custom-types/shared/coroutine.hpp"
 
 #include "questui/shared/CustomTypes/Components/FloatingScreen/FloatingScreen.hpp"
 #include "HMUI/ViewController.hpp"
@@ -18,6 +21,8 @@ namespace LeaderboardCore::Models {
         HMUI::ViewController* m_PanelViewController;
         HMUI::ViewController* m_LeaderboardViewController;
     private:
+        custom_types::Helpers::Coroutine WaitForScreen(HMUI::Screen* panel, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+
         void Show(HMUI::Screen* panelScreen, 
         UnityEngine::Vector3 leaderboardPos, 
         PlatformLeaderboardViewController* leaderboardViewController);

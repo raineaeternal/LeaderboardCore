@@ -1,11 +1,25 @@
 #include "shared/Models/CustomLeaderboard.hpp"
 
 namespace LeaderboardCore::Models {
+
+    custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(HMUI::Screen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
+        while(!panelScreen->get_isActiveAndEnabled()) {
+            co_yield nullptr;
+        }
+        Show(panelScreen, leaderboardPosition, platformLeaderboardViewController);
+        co_return;
+    }
+    
     void CustomLeaderboard::Show(HMUI::Screen* panelScreen, 
     UnityEngine::Vector3 leaderboardPos, 
     PlatformLeaderboardViewController* leaderboardViewController) {
-        if (panelScreen != nullptr) {
 
+        if (!panelScreen->get_isActiveAndEnabled()) {
+            SharedCoroutineStarter::get_instance()
+            ->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(WaitForScreen(panelScreen, leaderboardPos, leaderboardViewController)));
+        }
+
+        if (panelScreen != nullptr) {
             panelScreen->SetRootViewController(m_PanelViewController, ViewController::AnimationType::None);
 
             if (!m_PanelViewController->get_isActiveAndEnabled()) {
