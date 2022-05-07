@@ -4,10 +4,9 @@
 #include "custom-types/shared/macros.hpp"
 using namespace QuestUI;
 
-#include "sombrero/shared/FastVector3.hpp"
+#include "UnityEngine/Vector3.hpp"
 #include "UnityEngine/Transform.hpp"
 #include "HMUI/ViewController.hpp"
-using namespace Sombrero;
 using namespace UnityEngine;
 
 #include "GlobalNamespace/IPreviewBeatmapLevel.hpp"
@@ -50,7 +49,7 @@ DECLARE_CLASS_CODEGEN(LeaderboardCore::UI::ViewControllers, LeaderboardNavigatio
 
         void AddLeaderboardSet(INotifyLeaderboardSet* interface);
 
-        void AddScoreSaberActivated(INotifyScoreSaberActive* interface);
+        // void AddScoreSaberActivated(INotifyScoreSaberActive* interface);  // TODO: Uncomment if SS decides to not play nice
 
         void AddLeaderboardChange(INotifyLeaderboardChange* interface);
 
@@ -59,7 +58,7 @@ DECLARE_CLASS_CODEGEN(LeaderboardCore::UI::ViewControllers, LeaderboardNavigatio
         QuestUI::FloatingScreen* m_buttonsFloatingScreen;
         QuestUI::FloatingScreen* m_panelFloatingScreen;
         UnityEngine::Transform* m_containerTransform;
-        Sombrero::FastVector3 m_containerPos;
+        UnityEngine::Vector3 m_containerPos;
         IPreviewBeatmapLevel* m_selectedLevel;
         std::vector<Models::CustomLeaderboard*> m_customLeaderboards;
         int m_currentIndex;

@@ -12,15 +12,19 @@ namespace LeaderboardCore::UI::ViewControllers {
     void LeaderboardNavigationButtonsController::AddLeaderboardSet(INotifyLeaderboardSet *interface) {
         leaderboardSetList.push_back(interface);
     }
+    
     void LeaderboardNavigationButtonsController::AddLeaderboardChange(INotifyLeaderboardChange *interface) {
         leaderboardChangeList.push_back(interface);
     }
+
     void LeaderboardNavigationButtonsController::AddLeaderboardLoad(INotifyLeaderboardLoad *interface) {
         leaderboardLoadList.push_back(interface);
     }
-    void LeaderboardNavigationButtonsController::AddScoreSaberActivated(INotifyScoreSaberActive *interface) {
-        scoresaberActiveList.push_back(interface);
-    }
+
+    // TODO: Uncomment if SS decides to not play nice.
+    // void LeaderboardNavigationButtonsController::AddScoreSaberActivated(INotifyScoreSaberActive *interface) {
+    //     scoresaberActiveList.push_back(interface);
+    // }
 
     void LeaderboardNavigationButtonsController::OnScoreSaberActivated() {
         for(auto interface : scoresaberActiveList) {
