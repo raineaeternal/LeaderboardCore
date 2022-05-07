@@ -7,6 +7,8 @@ using namespace GlobalNamespace;
 
 #include "questui/shared/CustomTypes/Components/FloatingScreen/FloatingScreen.hpp"
 #include "HMUI/ViewController.hpp"
+#include "HMUI/ViewController_AnimationType.hpp"
+#include "HMUI/Screen.hpp"
 using namespace QuestUI;
 using namespace HMUI;
 
@@ -16,10 +18,10 @@ namespace LeaderboardCore::Models {
         HMUI::ViewController* m_PanelViewController;
         HMUI::ViewController* m_LeaderboardViewController;
     private:
-        void Show(FloatingScreen* panelScreen, 
+        void Show(HMUI::Screen* panelScreen, 
         UnityEngine::Vector3 leaderboardPos, 
         PlatformLeaderboardViewController* leaderboardViewController);
 
-        void Hide(FloatingScreen* panelScreen);
+        void Hide(HMUI::Screen* panelScreen);
     };
 }

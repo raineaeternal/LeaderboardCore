@@ -14,7 +14,7 @@ using namespace UnityEngine;
 #include "HMUI/ViewController.hpp"
 using namespace GlobalNamespace;
 
-#include "Models/CustomLeaderboard.hpp"
+#include "shared/Models/CustomLeaderboard.hpp"
 #include "shared/Interfaces/INotifyLeaderboardActivate.hpp"
 #include "shared/Interfaces/INotifyLeaderboardChange.hpp"
 #include "shared/Interfaces/INotifyLeaderboardSet.hpp"
@@ -23,11 +23,6 @@ using namespace LeaderboardCore;
 using namespace LeaderboardCore::Interfaces;
 
 #include <vector>
-
-#define NeededInterfaces                                                                                                                                                                                                                     \
-{                                                                                                                                                                                                                                            \
-    classof(INotifyLeaderboardSet*), classof(INotifyLeaderboardActivate*), classof(INotifyLeaderboardLoad*), classof(INotifyLeaderboardChange*)                                                                                              \
-}
 
 DECLARE_CLASS_CODEGEN(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController, HMUI::ViewController,
     DECLARE_INSTANCE_METHOD(void, OnEnable);
