@@ -27,7 +27,7 @@ namespace LeaderboardCore::UI::ViewControllers {
     // }
 
     void LeaderboardNavigationButtonsController::OnScoreSaberActivated() {
-        for(auto interface : scoresaberActiveList) {
+        for(auto& interface : scoresaberActiveList) {
             interface->OnScoreSaberActivated();
         }
     }
@@ -37,19 +37,19 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard*>& customLeaderboards) {
-        for(auto instance : leaderboardChangeList) {
+        for(auto& instance : leaderboardChangeList) {
             instance->OnLeaderboardChange(customLeaderboards);
         }
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardLoaded(bool loaded) {
-        for(auto interface : leaderboardLoadList) {
+        for(auto& interface : leaderboardLoadList) {
             interface->OnLeaderboardLoaded(loaded);
         }
     }
     
     void LeaderboardNavigationButtonsController::OnLeaderboardSet(IDifficultyBeatmap* diff) {
-        for(auto interface : leaderboardSetList) {
+        for(auto& interface : leaderboardSetList) {
             interface->OnLeaderboardSet(diff);
         }
     }
