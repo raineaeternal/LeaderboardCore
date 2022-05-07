@@ -1,7 +1,6 @@
 #pragma once
 
-#include "sombrero/shared/FastVector3.hpp"
-using namespace Sombrero;
+#include "UnityEngine/Vector3.hpp"
 
 #include "GlobalNamespace/PlatformLeaderboardViewController.hpp"
 using namespace GlobalNamespace;
@@ -18,7 +17,7 @@ namespace LeaderboardCore::Models {
         HMUI::ViewController* m_LeaderboardViewController;
     private:
         void Show(FloatingScreen* panelScreen, 
-        FastVector3 leaderboardPos, 
+        UnityEngine::Vector3 leaderboardPos, 
         PlatformLeaderboardViewController* leaderboardViewController);
 
         void Hide(FloatingScreen* panelScreen);

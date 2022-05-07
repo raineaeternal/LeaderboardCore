@@ -36,11 +36,6 @@
       "additionalData": {}
     },
     {
-      "id": "sombrero",
-      "versionRange": "^0.1.30",
-      "additionalData": {}
-    },
-    {
       "id": "custom-types",
       "versionRange": "^0.15.9",
       "additionalData": {}
