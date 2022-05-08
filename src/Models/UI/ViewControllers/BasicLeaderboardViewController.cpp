@@ -7,8 +7,11 @@
 #include "UnityEngine/UI/LayoutElement.hpp"
 #include "UnityEngine/TextAlignment.hpp"
 #include "TMPro/TextMeshPro.hpp"
+#include "include/UIElements/LoadingControl.hpp"
 
 #include "include/Base64CaratStrings.hpp"
+
+#include "main.hpp"
 
 
 DEFINE_TYPE(LeaderboardCore::Models::UI::ViewControllers, BasicLeaderboardViewController)
@@ -43,6 +46,8 @@ namespace LeaderboardCore::Models::UI::ViewControllers {
                                   ->GetComponent<UnityEngine::UI::LayoutElement*>()
                                   ->set_preferredWidth(80);
 
+            auto loadingControl = LeaderboardCore::UI::Elements::CreateLoadingIndicator(leaderboardLayoutGroup->get_transform(), UnityEngine::Vector2(0, 0));
+
             auto pageButtonUp = QuestUI::BeatSaberUI::CreateClickableImage(horizontal->get_transform(), QuestUI::BeatSaberUI::Base64ToSprite(carat_up), [](){
 
             });
@@ -57,7 +62,12 @@ namespace LeaderboardCore::Models::UI::ViewControllers {
 
     }
 
-    void BasicLeaderboardViewController::SetScores(std::vector<GlobalNamespace::LeaderboardTableView::ScoreData> scores, int specialScorePos) {
-        
+    void BasicLeaderboardViewController::SetScores(List<GlobalNamespace::LeaderboardTableView::ScoreData*>* scores, int specialScorePos) {
+        if (table) {
+            table->SetScores(scores, specialScorePos);
+            isLoaded = true;
+        } else {
+            getLogger().warning("Tried to set scores when there are no tables available!");
+        }
     }
 }
