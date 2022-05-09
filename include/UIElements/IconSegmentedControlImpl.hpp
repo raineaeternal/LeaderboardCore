@@ -10,7 +10,7 @@
 #include "UnityEngine/Sprite.hpp"
 #include "UnityEngine/GameObject.hpp"
 
-___DECLARE_TYPE_WRAPPER_INHERITANCE(LeaderboardCore, IconSegmentedControlImpl, Il2CppTypeEnum::IL2CPP_TYPE_CLASS, UnityEngine::MonoBehaviour, "LeaderboardCore", { classof(HMUI::SegmentedControl::IDataSource*) }, 0, nullptr,
+___DECLARE_TYPE_WRAPPER_INHERITANCE(LeaderboardCore::UI, IconSegmentedControlImpl, Il2CppTypeEnum::IL2CPP_TYPE_CLASS, UnityEngine::MonoBehaviour, "LeaderboardCore", { classof(HMUI::SegmentedControl::IDataSource*) }, 0, nullptr,
     DECLARE_INSTANCE_FIELD(SegmentedControl*, segmentedControl);
 
     DECLARE_INSTANCE_FIELD(HMUI::IconSegmentedControlCell*, firstCellPrefab);
