@@ -2,7 +2,7 @@
 
 namespace LeaderboardCore::Models {
 
-    custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(HMUI::Screen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
+    custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(QuestUI::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
         while(!panelScreen->get_isActiveAndEnabled()) {
             co_yield nullptr;
         }
@@ -10,7 +10,7 @@ namespace LeaderboardCore::Models {
         co_return;
     }
     
-    void CustomLeaderboard::Show(HMUI::Screen* panelScreen, 
+    void CustomLeaderboard::Show(QuestUI::FloatingScreen* panelScreen,
     UnityEngine::Vector3 leaderboardPos, 
     PlatformLeaderboardViewController* leaderboardViewController) {
 
@@ -40,7 +40,7 @@ namespace LeaderboardCore::Models {
         m_LeaderboardViewController->get_transform()->set_parent(leaderboardViewController->get_transform());
     }
 
-    void CustomLeaderboard::Hide(HMUI::Screen* panelScreen) {
+    void CustomLeaderboard::Hide(QuestUI::FloatingScreen* panelScreen) {
         if (panelScreen != nullptr) {
             panelScreen->SetRootViewController(nullptr, ViewController::AnimationType::None);
         } else {

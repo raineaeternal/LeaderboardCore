@@ -21,12 +21,12 @@ namespace LeaderboardCore::Models {
         HMUI::ViewController* m_PanelViewController;
         HMUI::ViewController* m_LeaderboardViewController;
     private:
-        custom_types::Helpers::Coroutine WaitForScreen(HMUI::Screen* panel, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+        custom_types::Helpers::Coroutine WaitForScreen(QuestUI::FloatingScreen* panel, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
 
-        void Show(HMUI::Screen* panelScreen, 
+        void Show(QuestUI::FloatingScreen* panelScreen,
         UnityEngine::Vector3 leaderboardPos, 
         PlatformLeaderboardViewController* leaderboardViewController);
 
-        void Hide(HMUI::Screen* panelScreen);
+        void Hide(QuestUI::FloatingScreen* panelScreen);
     };
 }
