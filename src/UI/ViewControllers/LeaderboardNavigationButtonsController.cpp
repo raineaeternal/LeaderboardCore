@@ -1,10 +1,17 @@
 #include "include/UI/ViewControllers/LeaderboardNavigationButtonsController.hpp"
 
 #include "GlobalNamespace/IDifficultyBeatmap.hpp"
+#include "questui/shared/BeatSaberUI.hpp"
 
 DEFINE_TYPE(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController)
 
 namespace LeaderboardCore::UI::ViewControllers {
+    void LeaderboardNavigationButtonsController::DidActivate(bool firstActivation, bool addedToHeirarchy, bool screenSystemDisabling) {
+        if (firstActivation) {
+
+        }
+    }
+
     void LeaderboardNavigationButtonsController::OnEnable() {
 
     }

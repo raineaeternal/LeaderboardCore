@@ -22,10 +22,14 @@ using namespace GlobalNamespace;
 using namespace LeaderboardCore;
 using namespace LeaderboardCore::Interfaces;
 
+#define GET_FIND_METHOD(mPtr) il2cpp_utils::il2cpp_type_check::MetadataGetter<mPtr>::get()
+
 #include <vector>
 
 DECLARE_CLASS_CODEGEN(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController, HMUI::ViewController,
     DECLARE_INSTANCE_METHOD(void, OnEnable);
+    DECLARE_OVERRIDE_METHOD(void, DidActivate, GET_FIND_METHOD(&HMUI::ViewController::DidActivate), bool firstActivation, bool addedToHeirarchy, bool screenSystemDisabling);
+
     public:
         std::vector<INotifyLeaderboardSet*> leaderboardSetList;
         std::vector<INotifyLeaderboardChange*> leaderboardChangeList;
