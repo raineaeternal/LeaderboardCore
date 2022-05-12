@@ -8,6 +8,7 @@
 #include "UnityEngine/TextAlignment.hpp"
 #include "TMPro/TextMeshPro.hpp"
 #include "include/UIElements/LoadingControl.hpp"
+#include "include/UIElements/LeaderboardComponent.hpp"
 
 #include "include/Base64CaratStrings.hpp"
 
@@ -45,6 +46,9 @@ namespace LeaderboardCore::Models::UI::ViewControllers {
             leaderboardLayoutGroup->get_gameObject()
                                   ->GetComponent<UnityEngine::UI::LayoutElement*>()
                                   ->set_preferredWidth(80);
+
+            auto leaderboard = LeaderboardCore::UI::Elements::CreateLeaderboardComponent(leaderboardLayoutGroup->get_transform());
+            leaderboard->GetComponent<GlobalNamespace::LeaderboardTableView*>()->rowHeight = 5.99f;
 
             auto loadingControl = LeaderboardCore::UI::Elements::CreateLoadingIndicator(leaderboardLayoutGroup->get_transform(), UnityEngine::Vector2(0, 0));
 
