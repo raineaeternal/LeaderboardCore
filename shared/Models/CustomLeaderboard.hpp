@@ -15,6 +15,11 @@ using namespace GlobalNamespace;
 using namespace QuestUI;
 using namespace HMUI;
 
+
+namespace LeaderboardCore::UI::ViewControllers {
+    class LeaderboardNavigationButtonsController;
+}
+
 namespace LeaderboardCore::Models {
     class CustomLeaderboard {
     public:
@@ -22,6 +27,7 @@ namespace LeaderboardCore::Models {
         HMUI::ViewController* m_LeaderboardViewController;
     private:
         custom_types::Helpers::Coroutine WaitForScreen(QuestUI::FloatingScreen* panel, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+        friend class LeaderboardCore::UI::ViewControllers::LeaderboardNavigationButtonsController;
 
         void Show(QuestUI::FloatingScreen* panelScreen,
         UnityEngine::Vector3 leaderboardPos, 
