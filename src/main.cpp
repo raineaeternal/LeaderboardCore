@@ -1,7 +1,6 @@
 #include "main.hpp"
-#include "include/Hooks/LeaderboardHook.hpp"
 #include "custom-types/shared/register.hpp"
-#include "questui/shared/QuestUI.hpp"
+#include "logger.h"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -19,14 +18,13 @@ Logger& getLogger() {
 }
 
 // Called at the early stages of game loading
-extern "C" void setup(ModInfo& info) {
-    std::string MODID = "LeaderboardCore"; 
+extern "C" void setup(ModInfo& info) { 
     info.id = MODID;
     info.version = VERSION;
     modInfo = info;
 	
     getConfig().Load(); // Load the config file
-    getLogger().info("Completed setup!");
+    INFO("Completed setup!");
 }
 
 // Called later on in the game loading - a good time to install function hooks
@@ -34,8 +32,4 @@ extern "C" void load() {
     il2cpp_functions::Init();
     custom_types::Register::AutoRegister();
     QuestUI::Init();
-
-    getLogger().info("Installing hooks...");
-    InstallHook();
-    getLogger().info("Installed all hooks!");
 }
