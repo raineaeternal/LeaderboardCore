@@ -1,4 +1,5 @@
 #include "Models/CustomLeaderboard.hpp"
+#include "GlobalNamespace/SharedCoroutineStarter.hpp"
 #include "HMUI/ViewController.hpp"
 #include "HMUI/ViewController_AnimationType.hpp"
 
@@ -7,7 +8,9 @@ namespace LeaderboardCore::Models {
         panelScreen->get_gameObject()->SetActive(true);
 
         if (!panelScreen->get_isActiveAndEnabled()) {
-            custom_types::Helpers::CoroutineHelper::New(CustomLeaderboard::WaitForScreen(panelScreen, leaderboardPosition, platformLeaderboardViewController));
+            GlobalNamespace::SharedCoroutineStarter::get_instance()->
+                StartCoroutine(custom_types::Helpers::CoroutineHelper::New(
+                    CustomLeaderboard::WaitForScreen(panelScreen, leaderboardPosition, platformLeaderboardViewController)));
             return;
         }
 
