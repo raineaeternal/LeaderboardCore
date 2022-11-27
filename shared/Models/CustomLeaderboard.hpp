@@ -9,10 +9,9 @@
 #include <string>
 
 namespace LeaderboardCore {
-    class CustomLeaderboardManager;
     namespace Models {
         class CustomLeaderboard {
-            friend ::LeaderboardCore::CustomLeaderboardManager;
+            friend class ::LeaderboardCore::Managers::CustomLeaderboardManager;
             public:
             protected:
                 /// @brief getter for the panel view controller (the one above the leaderboard), you have to override this method!
@@ -29,6 +28,7 @@ namespace LeaderboardCore {
                 /// @return leaderboard ID string
                 std::string get_LeaderboardId() { return pluginId + get_leaderboardId(); }
                 std::string pluginId;
+
                 /// @brief Shows the current leaderboard, internally used
                 /// @param panelScreen the floating screen for the panel
                 /// @param leaderboardPosition the position of the leaderboard
