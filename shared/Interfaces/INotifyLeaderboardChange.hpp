@@ -1,5 +1,8 @@
 #pragma once
 
+#include <set>
+#include "Models/CustomLeaderboard.hpp"
+
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardChange {
     public:

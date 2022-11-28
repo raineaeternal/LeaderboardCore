@@ -8,12 +8,13 @@
 #include "bsml/shared/BSML/FloatingScreen/FloatingScreen.hpp"
 #include <string>
 
+#include "Managers/CustomLeaderboardManager.hpp"
+
 namespace LeaderboardCore {
     namespace Models {
         class CustomLeaderboard {
-            friend class ::LeaderboardCore::Managers::CustomLeaderboardManager;
+            friend class LeaderboardCore::Managers::CustomLeaderboardManager;
             public:
-            protected:
                 /// @brief getter for the panel view controller (the one above the leaderboard), you have to override this method!
                 /// @return the view controller that belongs to the panel
                 virtual HMUI::ViewController* get_panelViewController() = 0;
@@ -22,11 +23,12 @@ namespace LeaderboardCore {
                 virtual HMUI::ViewController* get_leaderboardViewController() = 0;
                 /// @brief getter for the leaderboard ID, for if your mod has multiple ids
                 /// @return string leaderboard id
-                virtual std::string get_leaderboardId() { return ""; }
+                std::string get_LeaderboardId() { return pluginId + get_leaderboardId(); }
+            protected:
             private:
                 /// @brief getter for the actual, to-be-used id, plugin id + leaderboard id
                 /// @return leaderboard ID string
-                std::string get_LeaderboardId() { return pluginId + get_leaderboardId(); }
+                virtual std::string get_leaderboardId() { return ""; }
                 std::string pluginId;
 
                 /// @brief Shows the current leaderboard, internally used
