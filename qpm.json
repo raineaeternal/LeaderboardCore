@@ -44,6 +44,11 @@
       "id": "bsml",
       "versionRange": "^0.2.4",
       "additionalData": {}
+    },
+    {
+      "id": "paper",
+      "versionRange": "^1.2.9",
+      "additionalData": {}
     }
   ],
   "additionalData": {}

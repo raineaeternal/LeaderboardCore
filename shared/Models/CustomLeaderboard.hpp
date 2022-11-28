@@ -8,12 +8,13 @@
 #include "bsml/shared/BSML/FloatingScreen/FloatingScreen.hpp"
 #include <string>
 
-#include "Managers/CustomLeaderboardManager.hpp"
-
 namespace LeaderboardCore {
+    namespace Managers {
+        class CustomLeaderboardManager;
+    }
     namespace Models {
         class CustomLeaderboard {
-            friend class LeaderboardCore::Managers::CustomLeaderboardManager;
+            friend ::LeaderboardCore::Managers::CustomLeaderboardManager;
             public:
                 /// @brief getter for the panel view controller (the one above the leaderboard), you have to override this method!
                 /// @return the view controller that belongs to the panel

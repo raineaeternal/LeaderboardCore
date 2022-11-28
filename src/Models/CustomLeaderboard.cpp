@@ -48,8 +48,9 @@ namespace LeaderboardCore::Models {
 
     custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
         while (!panelScreen->get_isActiveAndEnabled()) {
-            return co_yield nullptr;
+            co_yield nullptr;
         }
         Show(panelScreen, leaderboardPosition, platformLeaderboardViewController);
+        co_return;
     }
 }
