@@ -5,7 +5,7 @@ set(ASSETS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets)
 set(ASSET_BINARIES_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/binaryAssets)
 # Directory to save the prepended files to
 set(PREPENDED_ASSETS_DIR ${CMAKE_CURRENT_BINARY_DIR}/prependedAssets)
-set(ASSET_HEADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include/assets.hpp")
+set(ASSET_HEADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include/assets.h")
 
 # Define a macro which we will use for defining the symbols to access our asset files below
 set(ASSET_HEADER_DATA 
