@@ -49,6 +49,11 @@
       "id": "paper",
       "versionRange": "^1.2.9",
       "additionalData": {}
+    },
+    {
+      "id": "lapiz",
+      "versionRange": "^0.1.6",
+      "additionalData": {}
     }
   ],
   "additionalData": {}

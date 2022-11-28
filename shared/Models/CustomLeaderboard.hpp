@@ -12,9 +12,13 @@ namespace LeaderboardCore {
     namespace Managers {
         class CustomLeaderboardManager;
     }
+    namespace UI::ViewControllers {
+        class LeaderboardNavigationButtonsController;
+    }
     namespace Models {
         class CustomLeaderboard {
             friend ::LeaderboardCore::Managers::CustomLeaderboardManager;
+            friend ::LeaderboardCore::UI::ViewControllers::LeaderboardNavigationButtonsController;
             public:
                 /// @brief getter for the panel view controller (the one above the leaderboard), you have to override this method!
                 /// @return the view controller that belongs to the panel
