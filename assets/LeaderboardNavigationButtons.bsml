@@ -1,4 +1,4 @@
 <bg id='root' anchor-pos-y='-6.25' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/RedBrumbler/Quest-BSML-Docs/gh-pages/schema.xsd'>
-    <page-button id='m_leftButton' direction='Left' ignore-layout='true' pref-width='12' anchor-pos-x='-55' active='~leftButtonActive' on-click='LeftButtonClick' />
-    <page-button id='m_rightButton' direction='Right' ignore-layout='true' pref-width='12' anchor-pos-x='55' active='~rightButtonActive' on-click='RightButtonClick' />
+    <page-button id='_leftButton' direction='Left' ignore-layout='true' pref-width='12' anchor-pos-x='-55' active='~leftButtonActive' on-click='LeftButtonClick' />
+    <page-button id='_rightButton' direction='Right' ignore-layout='true' pref-width='12' anchor-pos-x='55' active='~rightButtonActive' on-click='RightButtonClick' />
 </bg>

@@ -4,6 +4,7 @@
 namespace LeaderboardCore::Managers {
     std::unordered_set<Interfaces::INotifyLeaderboardChange*> CustomLeaderboardManager::notifyCustomLeaderboardsChanges;
     std::unordered_map<std::string, Models::CustomLeaderboard*> CustomLeaderboardManager::customLeaderboardsById;
+    UnorderedEventCallback<const std::set<Models::CustomLeaderboard*>&, const std::unordered_map<std::string, Models::CustomLeaderboard*>&> CustomLeaderboardManager::onLeaderboardsChangedEvent;
 
     void CustomLeaderboardManager::Register(Models::CustomLeaderboard* customLeaderboard, const ModInfo& modInfo) {
         if (!customLeaderboardsById.contains(customLeaderboard->get_LeaderboardId())) {
@@ -26,5 +27,7 @@ namespace LeaderboardCore::Managers {
         for (const auto& lb : notifyCustomLeaderboardsChanges) {
             lb->OnLeaderboardsChanged(values, customLeaderboardsById);
         }
+
+        if (onLeaderboardsChangedEvent.size() > 0) onLeaderboardsChangedEvent.invoke(values, customLeaderboardsById);
     }
 }
