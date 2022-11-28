@@ -18,8 +18,8 @@ namespace LeaderboardCore::Managers {
             void Unregister(Models::CustomLeaderboard* customLeaderboard);
         protected:
         private:
-            std::unordered_set<Interfaces::INotifyLeaderboardChange*> notifyCustomLeaderboardsChanges;
-            std::unordered_map<std::string, Models::CustomLeaderboard*> customLeaderboardsById;
+            static std::unordered_set<Interfaces::INotifyLeaderboardChange*> notifyCustomLeaderboardsChanges;
+            static std::unordered_map<std::string, Models::CustomLeaderboard*> customLeaderboardsById;
             void OnLeaderboardsChanged();
     };
 }
