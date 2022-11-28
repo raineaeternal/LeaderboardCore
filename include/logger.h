@@ -5,7 +5,7 @@
 
 #include "paper/shared/logger.hpp"
 
-namespace BSML
+namespace LeaderboardCore
 {
     class Logging
     {
