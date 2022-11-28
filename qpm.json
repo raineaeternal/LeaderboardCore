@@ -7,7 +7,7 @@
     "version": "0.1.0",
     "url": "https://github.com/raineio/LeaderboardCore",
     "additionalData": {
-      "overrideSoName": "libLeaderboardCore.so"
+      "overrideSoName": "libleaderboardcore.so"
     }
   },
   "dependencies": [
