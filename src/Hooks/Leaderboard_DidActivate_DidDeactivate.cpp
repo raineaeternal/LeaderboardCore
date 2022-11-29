@@ -2,6 +2,8 @@
 
 #include "Hooks/Leaderboard_DidActivate_DidDeactivate.hpp"
 
+GlobalNamespace::PlatformLeaderboardViewController* LeaderboardCore::Hooks::LeaderboardPrefixFields::platformLeaderboardViewController = nullptr;
+
 MAKE_AUTO_HOOK_MATCH(Leaderboard_DidActivatePre, &GlobalNamespace::PlatformLeaderboardViewController::DidActivate, void, GlobalNamespace::PlatformLeaderboardViewController* self, bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
     LeaderboardCore::Hooks::LeaderboardPrefixFields::platformLeaderboardViewController = self;
     

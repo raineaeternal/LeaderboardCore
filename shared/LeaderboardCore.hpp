@@ -1,6 +1,6 @@
 #pragma once
 #include "Models/CustomLeaderboard.hpp"
-#include ""
+#include "GlobalNamespace/IDifficultyBeatmap.hpp"
 
 namespace LeaderboardCore {
     namespace Register {
@@ -42,10 +42,28 @@ namespace LeaderboardCore {
         /// @brief  Gets the disabling mod infos & reasons for a specific leaderboard Id
         /// @param leaderboardId the id of the leaderboard you want to check
         /// @return map of mod infos and their disabling reasons
-        const std::unordered_map<ModInfo, std::string>& GetDisablingModInfos(const std::string& leaderboardId);
+        const std::unordered_map<std::string, std::string>& GetDisablingModIds(const std::string& leaderboardId);
         
         /// @brief Gets the ids of the currently registered leaderboards
         /// @return vectir of leaderboard ids;
         std::vector<std::string> GetLeaderboardIds();
+    }
+
+    namespace Events {
+        typedef UnorderedEventCallback<GlobalNamespace::IDifficultyBeatmap*> NotifyLeaderboardSetEvent;
+        /// @brief invoked when a map has been selected on the leaderboard
+        NotifyLeaderboardSetEvent& NotifyLeaderboardSet();
+
+        /// @brief struct that contains information about a score, may be expanded in the future
+        struct OnScoreSubmittedInfo {
+            uint64_t maxScore;
+            uint64_t score;
+            void* modifiers;
+            float correctedAccuracy;
+        };
+
+        typedef UnorderedEventCallback<OnScoreSubmittedInfo> ScoreSubmittedEvent;
+        /// @brief invoked when a score is submitted in the game 
+        ScoreSubmittedEvent& ScoreSubmitted();
     }
 }

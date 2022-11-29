@@ -1,5 +1,6 @@
 #include "UI/ViewControllers/LeaderboardNavigationButtonsController.hpp"
 #include "Managers/CustomLeaderboardManager.hpp"
+#include "LeaderboardCore.hpp"
 #include "config.h"
 #include "assets.h"
 #include "bsml/shared/BSML.hpp"
@@ -28,7 +29,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         // TODO: the other 3 interface that this type uses must also be implemented as callbacks just like this one
         ::LeaderboardCore::Managers::CustomLeaderboardManager::onLeaderboardsChangedEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardsChanged, this};
         // Something::onScoreSaberActivatedEvent += {&LeaderboardNavigationButtonsController::OnScoreSaberActivated, this};
-        // Something::onLeaderboardSetEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardSet, this};
+        ::LeaderboardCore::Events::NotifyLeaderboardSet() += {&LeaderboardNavigationButtonsController::OnLeaderboardSet, this};
         // Something::onLeaderboardLoadedEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardLoaded, this};
         _buttonsFloatingScreen = BSML::FloatingScreen::CreateFloatingScreen({120.0f, 25.0f}, false, {0, 0, 0}, UnityEngine::Quaternion::get_identity());
         
@@ -68,7 +69,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         // TODO: the other 3 interface that this type uses must also be implemented as callbacks just like this one
         ::LeaderboardCore::Managers::CustomLeaderboardManager::onLeaderboardsChangedEvent -= {&LeaderboardNavigationButtonsController::OnLeaderboardsChanged, this};
         // Something::onScoreSaberActivatedEvent -= {&LeaderboardNavigationButtonsController::OnScoreSaberActivated, this};
-        // Something::onLeaderboardSetEvent -= {&LeaderboardNavigationButtonsController::OnLeaderboardSet, this};
+        ::LeaderboardCore::Events::NotifyLeaderboardSet() -= {&LeaderboardNavigationButtonsController::OnLeaderboardSet, this};
         // Something::onLeaderboardLoadedEvent -= {&LeaderboardNavigationButtonsController::OnLeaderboardLoaded, this};
 
         if (_buttonsFloatingScreen && _buttonsFloatingScreen->m_CachedPtr.m_value) {

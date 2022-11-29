@@ -2,6 +2,9 @@
 #include "custom-types/shared/register.hpp"
 #include "logger.h"
 
+#include "Installers/LeaderboardCoreMenuInstaller.hpp"
+#include "lapiz/shared/zenject/Zenjector.hpp"
+
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 // Loads the config from disk using our modInfo, then returns it for use
@@ -31,4 +34,7 @@ extern "C" void setup(ModInfo& info) {
 extern "C" void load() {
     il2cpp_functions::Init();
     custom_types::Register::AutoRegister();
+
+    auto zenjector = Lapiz::Zenject::Zenjector::Get();
+    zenjector->Install<LeaderboardCore::Installers::LeaderboardCoreMenuInstaller*>(Lapiz::Zenject::Location::Menu);
 }

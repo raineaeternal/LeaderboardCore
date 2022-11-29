@@ -34,12 +34,24 @@ namespace LeaderboardCore {
             return ScoreDisabling::GetScoreSubmissionAllowed(leaderboardId);
         }
 
-        const std::unordered_map<ModInfo, std::string>& GetDisablingModInfos(const std::string& leaderboardId) {
-            return ScoreDisabling::GetDisablingModInfos(leaderboardId);
+        const std::unordered_map<std::string, std::string>& GetDisablingModIds(const std::string& leaderboardId) {
+            return ScoreDisabling::GetDisablingModIds(leaderboardId);
         }
 
         std::vector<std::string> GetLeaderboardIds() {
             return ScoreDisabling::GetLeaderboardIds();
+        }
+    }
+
+    namespace Events {
+        NotifyLeaderboardSetEvent& NotifyLeaderboardSet() {
+            static NotifyLeaderboardSetEvent ev;
+            return ev;
+        }
+
+        ScoreSubmittedEvent& ScoreSubmitted() {
+            static ScoreSubmittedEvent ev;
+            return ev;
         }
     }
 }

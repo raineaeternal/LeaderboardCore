@@ -2,12 +2,12 @@
 #include "logger.h"
 
 namespace LeaderboardCore::Scoring {
-    std::unordered_map<std::string, std::unordered_map<ModInfo, std::string>> ScoreDisabling::disablingMods;
+    std::unordered_map<std::string, ScoreDisabling::DisableMap> ScoreDisabling::disablingMods;
     void ScoreDisabling::Disable(const ModInfo& modInfo, const std::string_view& reason) {
         for (auto& [leaderboardId, disablingModInfos] : disablingMods) {
-            auto modItr = disablingModInfos.find(modInfo);
+            auto modItr = disablingModInfos.find(modInfo.id);
             if (modItr == disablingModInfos.end()) {
-                disablingModInfos.emplace(modInfo, reason);
+                disablingModInfos.emplace(modInfo.id, reason);
             } else {
                 INFO("Mod with ID {} tried to disable scoring twice on leaderboard {}", modInfo.id, leaderboardId);
             }
@@ -17,12 +17,12 @@ namespace LeaderboardCore::Scoring {
     void ScoreDisabling::Disable(const std::string& leaderboardId, const ModInfo& modInfo, const std::string_view& reason) {
         auto lbItr = disablingMods.find(leaderboardId);
         if (lbItr == disablingMods.end()) {
-            lbItr = disablingMods.emplace(leaderboardId).first;
-            lbItr->second.emplace(modInfo, reason);
+            lbItr = disablingMods.emplace(leaderboardId, DisableMap()).first;
+            lbItr->second.emplace(modInfo.id, reason);
         } else {
-            auto modItr = lbItr->second.find(modInfo);
+            auto modItr = lbItr->second.find(modInfo.id);
             if (modItr == lbItr->second.end()) {
-                lbItr->second.emplace(modInfo, reason);
+                lbItr->second.emplace(modInfo.id, reason);
             } else {
                 INFO("Mod with ID {} tried to disable scoring twice on leaderboard {}", modInfo.id, leaderboardId);
             }
@@ -31,7 +31,7 @@ namespace LeaderboardCore::Scoring {
 
     void ScoreDisabling::Enable(const ModInfo& modInfo) {
         for (auto& [leaderboardId, disablingModInfos] : disablingMods) {
-            auto modItr = disablingModInfos.find(modInfo);
+            auto modItr = disablingModInfos.find(modInfo.id);
             if (modItr != disablingModInfos.end()) {
                 disablingModInfos.erase(modItr);
             } else {
@@ -43,7 +43,7 @@ namespace LeaderboardCore::Scoring {
     void ScoreDisabling::Enable(const std::string& leaderboardId, const ModInfo& modInfo) {
         auto lbItr = disablingMods.find(leaderboardId);
         if (lbItr != disablingMods.end()) {
-            auto modItr = lbItr->second.find(modInfo);
+            auto modItr = lbItr->second.find(modInfo.id);
             if (modItr != lbItr->second.end()) {
                 lbItr->second.erase(modItr);
             } else {
@@ -56,7 +56,7 @@ namespace LeaderboardCore::Scoring {
 
     void ScoreDisabling::RegisterLeaderboard(const std::string& leaderboardId) {
         auto lbItr = disablingMods.find(leaderboardId);
-        if (lbItr == disablingMods.end()) disablingMods.emplace(leaderboardId);
+        if (lbItr == disablingMods.end()) disablingMods.emplace(leaderboardId, DisableMap());
     }
 
     bool ScoreDisabling::GetScoreSubmissionAllowed(const std::string& leaderboardId) {
@@ -71,11 +71,11 @@ namespace LeaderboardCore::Scoring {
             else return disablingMods.empty();
         }
     }
-    const std::unordered_map<ModInfo, std::string>& ScoreDisabling::GetDisablingModInfos(const std::string& leaderboardId) {
+    const ScoreDisabling::DisableMap& ScoreDisabling::GetDisablingModIds(const std::string& leaderboardId) {
         auto lbItr = disablingMods.find(leaderboardId);
         if (lbItr != disablingMods.end()) return lbItr->second;
 
-        static std::unordered_map<ModInfo, std::string> empty{};
+        static DisableMap empty;
         return empty;
     }
 

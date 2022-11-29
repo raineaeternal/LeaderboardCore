@@ -10,13 +10,14 @@ namespace LeaderboardCore::Managers {
     class LeaderboardCoreManager {
         // CHECKME: Since ScoreSaber will be integrating, is this truly necessary?
         /// @brief notifies if ScoreSaber activates
-        void LeaderboardActivated();
+        static void LeaderboardActivated();
 
-        /// @brief Notifies leaderbords
-        /// @param loaded 
-        void PanelViewLoadingChanged(bool loaded);
-
-        void ScoreUploaded();
+        /// @brief Notifies leaderboards
+        /// @param loaded whether it was just loaded or unloaded
+        static void PanelViewLoadingChanged(bool loaded);
+        
+        /// @brief notifies if a score was uploaded
+        static void ScoreUploaded();
 
     private:
         static std::unordered_set<Interfaces::INotifyScoreSaberActivate *> notifyScoreSaberActivates;
