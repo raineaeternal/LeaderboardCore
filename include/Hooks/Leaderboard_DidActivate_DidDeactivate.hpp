@@ -7,4 +7,8 @@ namespace LeaderboardCore::Hooks {
     public:
         static GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController;
     };
+    class PlatformLeaderboardViewControllerEvents {
+        public:
+            static UnorderedEventCallback<bool, bool, bool> didActivateEvent;
+    };
 }

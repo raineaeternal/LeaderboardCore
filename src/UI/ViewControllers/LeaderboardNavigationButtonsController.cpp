@@ -1,8 +1,10 @@
 #include "UI/ViewControllers/LeaderboardNavigationButtonsController.hpp"
+#include "Hooks/Leaderboard_DidActivate_DidDeactivate.hpp"
 #include "Managers/CustomLeaderboardManager.hpp"
 #include "LeaderboardCore.hpp"
 #include "config.h"
 #include "assets.h"
+#include "logger.h"
 #include "bsml/shared/BSML.hpp"
 
 #include "GlobalNamespace/IDifficultyBeatmap.hpp"
@@ -55,14 +57,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         customFloatingScreenGO->SetActive(true);
         customFloatingScreenGO->set_name("CustomLeaderboardPanel");
         
-        auto delegate = BSML::MakeDelegate<::HMUI::ViewController::DidActivateDelegate*>(
-            std::function<void(bool, bool, bool)>(
-                [this](bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling){ 
-                    OnLeaderboardActivated(firstActivation, addedToHierarchy, screenSystemEnabling); 
-                }
-            )
-        );
-        _platformLeaderboardViewController->add_didActivateEvent(delegate);
+        Hooks::PlatformLeaderboardViewControllerEvents::didActivateEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardActivated, this};
     }
 
     void LeaderboardNavigationButtonsController::Dispose() {
@@ -75,6 +70,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         if (_buttonsFloatingScreen && _buttonsFloatingScreen->m_CachedPtr.m_value) {
             UnityEngine::Object::Destroy(_buttonsFloatingScreen->get_gameObject());
         }
+        Hooks::PlatformLeaderboardViewControllerEvents::didActivateEvent -= {&LeaderboardNavigationButtonsController::OnLeaderboardActivated, this};
     }
 
     void LeaderboardNavigationButtonsController::OnEnable() {
@@ -88,8 +84,8 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
-        if (firstActivation)
-            _buttonsFloatingScreen->SetRootViewController(this, HMUI::ViewController::AnimationType::None);
+        if (!firstActivation) return;
+        _buttonsFloatingScreen->SetRootViewController(this, HMUI::ViewController::AnimationType::None);
     }
 
     void LeaderboardNavigationButtonsController::OnScoreSaberActivated() {

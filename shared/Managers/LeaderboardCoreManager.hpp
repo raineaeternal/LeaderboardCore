@@ -15,7 +15,7 @@ namespace LeaderboardCore::Managers {
         /// @brief Notifies leaderboards
         /// @param loaded whether it was just loaded or unloaded
         static void PanelViewLoadingChanged(bool loaded);
-        
+
         /// @brief notifies if a score was uploaded
         static void ScoreUploaded();
 
