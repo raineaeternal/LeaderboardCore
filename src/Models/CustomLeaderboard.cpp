@@ -16,40 +16,44 @@ namespace LeaderboardCore::Models {
                 );
             return;
         }
+        auto panelViewController = get_panelViewController();
+        if (panelViewController && panelViewController->m_CachedPtr.m_value) {
+            panelScreen->SetRootViewController(panelViewController, HMUI::ViewController::AnimationType::None);
 
-        if (get_panelViewController() != nullptr) {
-            panelScreen->SetRootViewController(get_panelViewController(), HMUI::ViewController::AnimationType::None);
-
-            if (!get_panelViewController()->get_isActiveAndEnabled()) {
+            if (!panelViewController->get_isActiveAndEnabled()) {
                 DEBUG("setting panelview GO active!");
-                get_panelViewController()->get_gameObject()->SetActive(true);
-            } else {
-                DEBUG("Setting panelview root viewcontroller to null!");
-                panelScreen->SetRootViewController(nullptr, HMUI::ViewController::AnimationType::None);
-            }
+                panelViewController->get_gameObject()->SetActive(true);
+        } 
+        } else {
+            DEBUG("Setting panelview root viewcontroller to null!");
+            panelScreen->SetRootViewController(nullptr, HMUI::ViewController::AnimationType::None);
         }
 
-        if (get_leaderboardViewController() != nullptr) {
-            get_leaderboardViewController()->get_transform()->get_localPosition() = leaderboardPosition;
+        auto leaderboardViewController = get_leaderboardViewController();
+        if (leaderboardViewController && leaderboardViewController->m_CachedPtr.m_value) {
+            leaderboardViewController->get_transform()->set_localPosition(leaderboardPosition);
 
-            if (get_leaderboardViewController()->get_screen() == nullptr) {
+            if (leaderboardViewController->get_screen() == nullptr) {
                 DEBUG("Initializing platformleaderboardviewcontroller!");
-                get_leaderboardViewController()->__Init(platformLeaderboardViewController->screen, platformLeaderboardViewController, nullptr);
+                leaderboardViewController->__Init(platformLeaderboardViewController->screen, platformLeaderboardViewController, nullptr);
             }
 
-            get_leaderboardViewController()->__Activate(false, false);
-            get_leaderboardViewController()->get_transform()->SetParent(platformLeaderboardViewController->get_transform());
+            leaderboardViewController->__Activate(false, false);
+            leaderboardViewController->get_transform()->SetParent(platformLeaderboardViewController->get_transform());
         }
     }
 
     void CustomLeaderboard::Hide(BSML::FloatingScreen* panelScreen) {
-        if (panelScreen != nullptr) {
+        if (panelScreen && panelScreen->m_CachedPtr.m_value) {
             if (panelScreen->get_isActiveAndEnabled()) {
                 DEBUG("Setting root viewcontroller to null!");
                 panelScreen->SetRootViewController(nullptr, HMUI::ViewController::AnimationType::None);
             } else {
                 DEBUG("setting GO to nonactive!");
-                panelScreen->get_gameObject()->SetActive(false);
+                auto panelViewController = get_panelViewController();
+                if (panelViewController && panelViewController->m_CachedPtr.m_value) {
+                    panelViewController->get_gameObject()->SetActive(false);
+                }
             }
         }
     }

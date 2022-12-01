@@ -23,6 +23,7 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
+        DEBUG("DidActivate(firstActivation: {}, addedToHierarchy: {}, screenSystemEnabling: {})", firstActivation, addedToHierarchy, screenSystemEnabling);
         if (!firstActivation) return;
         BSML::parse_and_construct(IncludedAssets::LeaderboardNavigationButtons_bsml, get_transform(), this);
     }
@@ -35,9 +36,9 @@ namespace LeaderboardCore::UI::ViewControllers {
         // Something::onLeaderboardLoadedEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardLoaded, this};
         _buttonsFloatingScreen = BSML::FloatingScreen::CreateFloatingScreen({120.0f, 25.0f}, false, {0, 0, 0}, UnityEngine::Quaternion::get_identity());
         
-        auto buttonsFloatingScreenTransform = _buttonsFloatingScreen->get_transform();
+        auto buttonsFloatingScreenTransform = reinterpret_cast<UnityEngine::RectTransform*>(_buttonsFloatingScreen->get_transform());
         buttonsFloatingScreenTransform->SetParent(_platformLeaderboardViewController->get_transform());
-        buttonsFloatingScreenTransform->set_localPosition({3.0f, 50.0f, 0});
+        buttonsFloatingScreenTransform->set_anchoredPosition({3.0f, 50.0f});
         buttonsFloatingScreenTransform->set_localScale({1, 1, 1});
 
         auto buttonsFloatingScreenGO = _buttonsFloatingScreen->get_gameObject();
@@ -47,9 +48,9 @@ namespace LeaderboardCore::UI::ViewControllers {
 
         _customPanelFloatingScreen = BSML::FloatingScreen::CreateFloatingScreen({100.0f, 25.0f}, false, {0, 0, 0}, UnityEngine::Quaternion::get_identity());
 
-        auto customFloatingScreenTransform = _customPanelFloatingScreen->get_transform();
+        auto customFloatingScreenTransform = reinterpret_cast<UnityEngine::RectTransform*>(_customPanelFloatingScreen->get_transform());
         customFloatingScreenTransform->SetParent(_platformLeaderboardViewController->get_transform());
-        customFloatingScreenTransform->set_localPosition({3.0f, 50.0f, 0});
+        customFloatingScreenTransform->set_anchoredPosition({3.0f, 50.0f});
         customFloatingScreenTransform->set_localScale({1, 1, 1});
 
         auto customFloatingScreenGO = _customPanelFloatingScreen->get_gameObject();
@@ -74,6 +75,7 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::OnEnable() {
+        DEBUG("OnEnable");
         OnLeaderboardLoaded(_leaderboardLoaded);
 
         if (!_containerTransform || !_containerTransform->m_CachedPtr.m_value) {
@@ -93,15 +95,18 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardSet(GlobalNamespace::IDifficultyBeatmap* difficultyBeatmap) {
+        DEBUG("Level Set!");
         _selectedLevel = difficultyBeatmap->get_level()->i_IPreviewBeatmapLevel();
         OnLeaderboardLoaded(_leaderboardLoaded);
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardLoaded(bool loaded) {
+        DEBUG("OnLeaderboardLoaded({})", loaded);
         _leaderboardLoaded = loaded;
         if (!_selectedLevel || !get_levelIsCustom()) {
             SwitchToDefault();
         } else {
+            auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
             if (!loaded || (!config.lastLeaderboard.empty() && !customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex != 0)) {
                 SwitchToDefault();
             } else if (customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex == 0) {
@@ -115,9 +120,11 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::SwitchToDefault(::LeaderboardCore::Models::CustomLeaderboard* lastLeaderboard) {
+        DEBUG("SwitchToDefault(lastLeaderboard: {})", lastLeaderboard ? lastLeaderboard->get_LeaderboardId() : "nullptr");
         if (lastLeaderboard) {
             lastLeaderboard->Hide(_customPanelFloatingScreen);
         } else {
+        auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
             auto lbItr = customLeaderboardsById.find(config.lastLeaderboard);
             if (lbItr != customLeaderboardsById.end()) lbItr->second->Hide(_customPanelFloatingScreen);
         }
@@ -127,10 +134,12 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::SwitchToLastLeaderboard() {
+        DEBUG("SwitchToLastLeaderboard()");
+        auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
         auto lbItr = customLeaderboardsById.find(config.lastLeaderboard);
         if (lbItr != customLeaderboardsById.end()) {
             int lastLeaderboardIndex = 0;
-            for (const auto& v : orderedCustomLeaderboards) {
+            for (const auto& v : Managers::CustomLeaderboardManager::orderedCustomLeaderboards) {
                 if (v == lbItr->second) break;
                 lastLeaderboardIndex++;
             }
@@ -142,18 +151,21 @@ namespace LeaderboardCore::UI::ViewControllers {
 
     void LeaderboardNavigationButtonsController::YeetDefault() {
         if (_containerTransform && _containerTransform->m_CachedPtr.m_value) {
+            DEBUG("YeetDefault");
             _containerTransform->set_localPosition({-999, -999, -999});
         }
     }
 
     void LeaderboardNavigationButtonsController::UnYeetDefault() {
         if (_containerTransform && _containerTransform->m_CachedPtr.m_value) {
+            DEBUG("UnYeetDefault");
             _containerTransform->set_localPosition(_containerPosition);
         }
     }
 
     void LeaderboardNavigationButtonsController::LeftButtonClick() {
         if (config.lastLeaderboard.empty()) return;
+        auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
         auto lbItr = customLeaderboardsById.find(config.lastLeaderboard);
         if (lbItr != customLeaderboardsById.end()) {
             lbItr->second->Hide(_customPanelFloatingScreen);
@@ -164,7 +176,7 @@ namespace LeaderboardCore::UI::ViewControllers {
             UnYeetDefault();
             config.lastLeaderboard.clear();
         } else {
-            auto lastLeaderboard = *std::next(orderedCustomLeaderboards.begin(), _currentIndex - 1);
+            auto lastLeaderboard = *std::next(Managers::CustomLeaderboardManager::orderedCustomLeaderboards.begin(), _currentIndex - 1);
             config.lastLeaderboard = lastLeaderboard->get_LeaderboardId();
             lastLeaderboard->Show(_customPanelFloatingScreen, _containerPosition, _platformLeaderboardViewController);
         }
@@ -172,14 +184,17 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::RightButtonClick() {
+        DEBUG("RightButtonClick");
         RightButtonClick_overload(nullptr);
     }
 
     void LeaderboardNavigationButtonsController::RightButtonClick_overload(::LeaderboardCore::Models::CustomLeaderboard* lastLeaderboard) {
+        DEBUG("RightButtonClick(RightButtonClick_overload: {})", lastLeaderboard ? lastLeaderboard->get_LeaderboardId() : "nullptr");
         if (_currentIndex == 0) {
             YeetDefault();
         } else {
             if (!lastLeaderboard) {
+                auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
                 auto lbItr = customLeaderboardsById.find(config.lastLeaderboard);
                 if (lbItr != customLeaderboardsById.end()) {
                     lastLeaderboard = lbItr->second;
@@ -189,26 +204,21 @@ namespace LeaderboardCore::UI::ViewControllers {
         }
 
         _currentIndex++;
-        auto currentLeaderboard = *std::next(orderedCustomLeaderboards.begin(), _currentIndex - 1);
+        auto currentLeaderboard = *std::next(Managers::CustomLeaderboardManager::orderedCustomLeaderboards.begin(), _currentIndex - 1);
         config.lastLeaderboard = currentLeaderboard->get_LeaderboardId();
         currentLeaderboard->Show(_customPanelFloatingScreen, _containerPosition, _platformLeaderboardViewController);
         UpdateButtonsActive();
     }
 
     void LeaderboardNavigationButtonsController::OnLeaderboardsChanged(const std::set<::LeaderboardCore::Models::CustomLeaderboard*>& orderedCustomLeaderboards, const std::unordered_map<std::string, ::LeaderboardCore::Models::CustomLeaderboard*>& customLeaderboardsById) {
-        this->orderedCustomLeaderboards.clear();
-        this->orderedCustomLeaderboards.insert(orderedCustomLeaderboards.begin(), orderedCustomLeaderboards.end());
+        DEBUG("OnLeaderboardsChanged(orderedCustomLeaderboards: {}, customLeaderboardsById: {})", orderedCustomLeaderboards.size(), customLeaderboardsById.size());
 
-        auto lastLeaderboardItr = this->customLeaderboardsById.find(config.lastLeaderboard);
-        auto lastLeaderboard = lastLeaderboardItr != this->customLeaderboardsById.end() ? lastLeaderboardItr->second : nullptr;
-        this->customLeaderboardsById.clear();
-        for (const auto& [id, leaderboard] : customLeaderboardsById) {
-            this->customLeaderboardsById.emplace(id, leaderboard);
-        }
+        auto lastLeaderboardItr = customLeaderboardsById.find(config.lastLeaderboard);
+        auto lastLeaderboard = lastLeaderboardItr != customLeaderboardsById.end() ? lastLeaderboardItr->second : nullptr;
 
-        if (!config.lastLeaderboard.empty() && !this->customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex != 0) {
+        if (!config.lastLeaderboard.empty() && !customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex != 0) {
             SwitchToDefault(lastLeaderboard);
-        } else if (this->customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex == 0) {
+        } else if (customLeaderboardsById.contains(config.lastLeaderboard) && _currentIndex == 0) {
             SwitchToLastLeaderboard();
         } else if (_currentIndex == 0 && !get_showDefaultLeaderboard()) {
             RightButtonClick_overload(lastLeaderboard);
@@ -223,19 +233,27 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     bool LeaderboardNavigationButtonsController::get_leftButtonActive() {
-        return (_currentIndex > 0 && (get_showDefaultLeaderboard() || _currentIndex > 1 )) && _leaderboardLoaded && get_levelIsCustom();
+        auto result = (_currentIndex > 0 && (get_showDefaultLeaderboard() || _currentIndex > 1 )) && _leaderboardLoaded && get_levelIsCustom();
+        DEBUG("get_leftButtonActive -> {}", result);
+        return result;
     }
 
     bool LeaderboardNavigationButtonsController::get_rightButtonActive() {
-        return _currentIndex < orderedCustomLeaderboards.size() && _leaderboardLoaded && get_levelIsCustom();
+        auto result = _currentIndex < Managers::CustomLeaderboardManager::orderedCustomLeaderboards.size() && _leaderboardLoaded && get_levelIsCustom();
+        DEBUG("get_rightButtonActive -> {}", result);
+        return result;
     }
 
     bool LeaderboardNavigationButtonsController::get_showDefaultLeaderboard() {
-        return !(get_levelIsCustom()) || orderedCustomLeaderboards.empty();
+        auto result = (!get_levelIsCustom()) || Managers::CustomLeaderboardManager::orderedCustomLeaderboards.empty();
+        DEBUG("get_showDefaultLeaderboard -> {}", result);
+        return result;
     }
 
     bool LeaderboardNavigationButtonsController::get_levelIsCustom() {
-        return il2cpp_utils::try_cast<GlobalNamespace::CustomPreviewBeatmapLevel>(_selectedLevel).has_value();
+        auto result = il2cpp_utils::try_cast<GlobalNamespace::CustomPreviewBeatmapLevel>(_selectedLevel).has_value();
+        DEBUG("get_levelIsCustom -> {}", result);
+        return result;
     }
 
 }

@@ -58,6 +58,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI::ViewControllers, Leaderboa
         void UnYeetDefault();
         void RightButtonClick_overload(::LeaderboardCore::Models::CustomLeaderboard* lastLeaderboard);
         void OnLeaderboardsChanged(const std::set<::LeaderboardCore::Models::CustomLeaderboard*>& orderedCustomLeaderboards, const std::unordered_map<std::string, ::LeaderboardCore::Models::CustomLeaderboard*>& customLeaderboardsById);
-        std::set<::LeaderboardCore::Models::CustomLeaderboard*> orderedCustomLeaderboards;
-        std::unordered_map<std::string, ::LeaderboardCore::Models::CustomLeaderboard*> customLeaderboardsById;
 )

@@ -25,6 +25,7 @@ namespace LeaderboardCore {
             private:
                 static std::unordered_set<Interfaces::INotifyLeaderboardChange*> notifyCustomLeaderboardsChanges;
                 static std::unordered_map<std::string, Models::CustomLeaderboard*> customLeaderboardsById;
+                static std::set<Models::CustomLeaderboard*> orderedCustomLeaderboards;
                 static UnorderedEventCallback<const std::set<Models::CustomLeaderboard*>&, const std::unordered_map<std::string, Models::CustomLeaderboard*>&> onLeaderboardsChangedEvent;
                 static void OnLeaderboardsChanged();
         };

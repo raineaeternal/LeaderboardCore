@@ -5,6 +5,8 @@
 namespace LeaderboardCore::Managers {
     std::unordered_set<Interfaces::INotifyLeaderboardChange*> CustomLeaderboardManager::notifyCustomLeaderboardsChanges;
     std::unordered_map<std::string, Models::CustomLeaderboard*> CustomLeaderboardManager::customLeaderboardsById;
+    std::set<Models::CustomLeaderboard*> CustomLeaderboardManager::orderedCustomLeaderboards;
+
     UnorderedEventCallback<const std::set<Models::CustomLeaderboard*>&, const std::unordered_map<std::string, Models::CustomLeaderboard*>&> CustomLeaderboardManager::onLeaderboardsChangedEvent;
 
     void CustomLeaderboardManager::Register(Models::CustomLeaderboard* customLeaderboard, const ModInfo& modInfo) {
@@ -28,15 +30,15 @@ namespace LeaderboardCore::Managers {
     }
 
     void CustomLeaderboardManager::OnLeaderboardsChanged() {
-        std::set<LeaderboardCore::Models::CustomLeaderboard *> values;
+        orderedCustomLeaderboards.clear();
         for (const auto& [key, value] : customLeaderboardsById) {
-            values.insert(value);
+            orderedCustomLeaderboards.insert(value);
         }
 
         for (const auto& lb : notifyCustomLeaderboardsChanges) {
-            lb->OnLeaderboardsChanged(values, customLeaderboardsById);
+            lb->OnLeaderboardsChanged(orderedCustomLeaderboards, customLeaderboardsById);
         }
 
-        if (onLeaderboardsChangedEvent.size() > 0) onLeaderboardsChangedEvent.invoke(values, customLeaderboardsById);
+        if (onLeaderboardsChangedEvent.size() > 0) onLeaderboardsChangedEvent.invoke(orderedCustomLeaderboards, customLeaderboardsById);
     }
 }
