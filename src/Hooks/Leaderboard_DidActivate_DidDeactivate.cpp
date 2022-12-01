@@ -12,6 +12,7 @@ MAKE_AUTO_HOOK_MATCH(PlatformLeaderboardViewController_DidActivate, &GlobalNames
     PlatformLeaderboardViewController_DidActivate(self, firstActivation, addedToHierarchy, screenSystemEnabling);
     if (LeaderboardCore::Hooks::PlatformLeaderboardViewControllerEvents::didActivateEvent.size() > 0) 
         LeaderboardCore::Hooks::PlatformLeaderboardViewControllerEvents::didActivateEvent.invoke(firstActivation, addedToHierarchy, screenSystemEnabling);
+        DEBUG("Invoked in DidActivate!");
 }
 
 MAKE_AUTO_HOOK_MATCH(Leaderboard_DidDeactivate, &GlobalNamespace::PlatformLeaderboardViewController::DidDeactivate, void, GlobalNamespace::PlatformLeaderboardViewController* self, bool removedFromHierarchy, bool screenSystemDisabling) {

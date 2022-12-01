@@ -3,6 +3,8 @@
 #include "HMUI/ViewController.hpp"
 #include "HMUI/ViewController_AnimationType.hpp"
 
+#include "logger.h"
+
 namespace LeaderboardCore::Models {
     void CustomLeaderboard::Show(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
         panelScreen->get_gameObject()->SetActive(true);
@@ -10,7 +12,8 @@ namespace LeaderboardCore::Models {
         if (!panelScreen->get_isActiveAndEnabled()) {
             GlobalNamespace::SharedCoroutineStarter::get_instance()->
                 StartCoroutine(custom_types::Helpers::CoroutineHelper::New(
-                    CustomLeaderboard::WaitForScreen(panelScreen, leaderboardPosition, platformLeaderboardViewController)));
+                    CustomLeaderboard::WaitForScreen(panelScreen, leaderboardPosition, platformLeaderboardViewController))
+                );
             return;
         }
 
@@ -18,8 +21,10 @@ namespace LeaderboardCore::Models {
             panelScreen->SetRootViewController(get_panelViewController(), HMUI::ViewController::AnimationType::None);
 
             if (!get_panelViewController()->get_isActiveAndEnabled()) {
+                DEBUG("setting panelview GO active!");
                 get_panelViewController()->get_gameObject()->SetActive(true);
             } else {
+                DEBUG("Setting panelview root viewcontroller to null!");
                 panelScreen->SetRootViewController(nullptr, HMUI::ViewController::AnimationType::None);
             }
         }
@@ -28,6 +33,7 @@ namespace LeaderboardCore::Models {
             get_leaderboardViewController()->get_transform()->get_localPosition() = leaderboardPosition;
 
             if (get_leaderboardViewController()->get_screen() == nullptr) {
+                DEBUG("Initializing platformleaderboardviewcontroller!");
                 get_leaderboardViewController()->__Init(platformLeaderboardViewController->screen, platformLeaderboardViewController, nullptr);
             }
 
@@ -39,8 +45,10 @@ namespace LeaderboardCore::Models {
     void CustomLeaderboard::Hide(BSML::FloatingScreen* panelScreen) {
         if (panelScreen != nullptr) {
             if (panelScreen->get_isActiveAndEnabled()) {
+                DEBUG("Setting root viewcontroller to null!");
                 panelScreen->SetRootViewController(nullptr, HMUI::ViewController::AnimationType::None);
             } else {
+                DEBUG("setting GO to nonactive!");
                 panelScreen->get_gameObject()->SetActive(false);
             }
         }
@@ -48,9 +56,11 @@ namespace LeaderboardCore::Models {
 
     custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
         while (!panelScreen->get_isActiveAndEnabled()) {
+            DEBUG("Waiting for screen!");
             co_yield nullptr;
         }
         Show(panelScreen, leaderboardPosition, platformLeaderboardViewController);
+        DEBUG("Screen shown!");
         co_return;
     }
 }
