@@ -56,6 +56,11 @@ namespace LeaderboardCore::Models {
                 }
             }
         }
+
+        auto leaderboardViewController = get_leaderboardViewController();
+        if (leaderboardViewController && leaderboardViewController->m_CachedPtr.m_value) {
+            leaderboardViewController->__Deactivate(false, true, false);
+        }
     }
 
     custom_types::Helpers::Coroutine CustomLeaderboard::WaitForScreen(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController) {
