@@ -124,7 +124,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         if (lastLeaderboard) {
             lastLeaderboard->Hide(_customPanelFloatingScreen);
         } else {
-        auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
+            auto& customLeaderboardsById = Managers::CustomLeaderboardManager::customLeaderboardsById;
             auto lbItr = customLeaderboardsById.find(config.lastLeaderboard);
             if (lbItr != customLeaderboardsById.end()) lbItr->second->Hide(_customPanelFloatingScreen);
         }
