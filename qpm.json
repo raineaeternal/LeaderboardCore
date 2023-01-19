@@ -4,7 +4,7 @@
   "info": {
     "name": "LeaderboardCore",
     "id": "leaderboardcore",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "url": "https://github.com/raineio/LeaderboardCore",
     "additionalData": {
       "overrideSoName": "libleaderboardcore.so"
@@ -26,23 +26,13 @@
       "additionalData": {}
     },
     {
-      "id": "codegen",
-      "versionRange": "^0.29.0",
-      "additionalData": {}
-    },
-    {
-      "id": "questui",
-      "versionRange": "^0.17.6",
-      "additionalData": {}
-    },
-    {
       "id": "custom-types",
       "versionRange": "^0.15.22",
       "additionalData": {}
     },
     {
       "id": "bsml",
-      "versionRange": "^0.2.4",
+      "versionRange": "^0.3.0",
       "additionalData": {}
     },
     {
@@ -51,8 +41,13 @@
       "additionalData": {}
     },
     {
+      "id": "codegen",
+      "versionRange": "^0.32.0",
+      "additionalData": {}
+    },
+    {
       "id": "lapiz",
-      "versionRange": "^0.1.6",
+      "versionRange": "^0.1.9",
       "additionalData": {}
     }
   ],
