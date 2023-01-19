@@ -1,4 +1,7 @@
 {
+    "env": {
+      "ndkPath": "D:/QuestModding/ndk-r23c"
+    },
     "configurations": [
       {
         "defines": [
@@ -21,8 +24,7 @@
         "name": "Quest",
         "cStandard": "c11",
         "cppStandard": "c++20",
-        "intelliSenseMode": "clang-x64", 
-        "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+        "intelliSenseMode": "clang-x64"
       }
     ],
     "version": 4

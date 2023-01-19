@@ -1,32 +1,54 @@
 #pragma once
 
+#include "HMUI/ViewController.hpp"
+#include "GlobalNamespace/PlatformLeaderboardViewController.hpp"
 #include "UnityEngine/Vector3.hpp"
 
-#include "GlobalNamespace/PlatformLeaderboardViewController.hpp"
-#include "GlobalNamespace/SharedCoroutineStarter.hpp"
-using namespace GlobalNamespace;
-
 #include "custom-types/shared/coroutine.hpp"
+#include "bsml/shared/BSML/FloatingScreen/FloatingScreen.hpp"
+#include <string>
 
-#include "questui/shared/CustomTypes/Components/FloatingScreen/FloatingScreen.hpp"
-#include "HMUI/ViewController.hpp"
-#include "HMUI/ViewController_AnimationType.hpp"
-#include "HMUI/Screen.hpp"
-using namespace QuestUI;
-using namespace HMUI;
+namespace LeaderboardCore {
+    namespace Managers {
+        class CustomLeaderboardManager;
+    }
+    namespace UI::ViewControllers {
+        class LeaderboardNavigationButtonsController;
+    }
+    namespace Models {
+        class CustomLeaderboard {
+            friend ::LeaderboardCore::Managers::CustomLeaderboardManager;
+            friend ::LeaderboardCore::UI::ViewControllers::LeaderboardNavigationButtonsController;
+            public:
+                /// @brief getter for the panel view controller (the one above the leaderboard), you have to override this method!
+                /// @return the view controller that belongs to the panel
+                virtual HMUI::ViewController* get_panelViewController() = 0;
+                /// @brief getter for the leaderboard view controller, you have to override this method!
+                /// @return the view controller on which you display your scores
+                virtual HMUI::ViewController* get_leaderboardViewController() = 0;
+                /// @brief getter for the leaderboard ID, for if your mod has multiple ids
+                /// @return string leaderboard id
+                std::string get_LeaderboardId() { return pluginId + get_leaderboardId(); }
+            protected:
+            private:
+                /// @brief getter for the actual, to-be-used id, plugin id + leaderboard id
+                /// @return leaderboard ID string
+                virtual std::string get_leaderboardId() { return ""; }
+                std::string pluginId;
 
-namespace LeaderboardCore::Models {
-    class CustomLeaderboard {
-    public:
-        HMUI::ViewController* m_PanelViewController;
-        HMUI::ViewController* m_LeaderboardViewController;
-    private:
-        custom_types::Helpers::Coroutine WaitForScreen(HMUI::Screen* panel, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
-
-        void Show(HMUI::Screen* panelScreen, 
-        UnityEngine::Vector3 leaderboardPos, 
-        PlatformLeaderboardViewController* leaderboardViewController);
-
-        void Hide(HMUI::Screen* panelScreen);
-    };
+                /// @brief Shows the current leaderboard, internally used
+                /// @param panelScreen the floating screen for the panel
+                /// @param leaderboardPosition the position of the leaderboard
+                /// @param platformLeaderboardViewController the existing leaderboard view from the game
+                void Show(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+                /// @brief Hide this leaderboard, internally used
+                /// @param panelScreen the floating screen for the panel
+                void Hide(BSML::FloatingScreen* panelScreen);
+                /// @brief coroutine used to wait for the screen to be done
+                /// @param panelScreen the floating screen for the panel
+                /// @param leaderboardPosition the position of it
+                /// @param platformLeaderboardViewController the existing leaderboard view from the game
+                custom_types::Helpers::Coroutine WaitForScreen(BSML::FloatingScreen* panelScreen, UnityEngine::Vector3 leaderboardPosition, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+        };
+    }
 }

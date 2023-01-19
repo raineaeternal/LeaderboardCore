@@ -1,69 +1,61 @@
 #pragma once
 
-#include "questui/shared/CustomTypes/Components/FloatingScreen/FloatingScreen.hpp"
 #include "custom-types/shared/macros.hpp"
-using namespace QuestUI;
+#include "lapiz/shared/macros.hpp"
 
-#include "UnityEngine/Vector3.hpp"
-#include "UnityEngine/Transform.hpp"
 #include "HMUI/ViewController.hpp"
-using namespace UnityEngine;
-
+#include "Zenject/IInitializable.hpp"
+#include "System/IDisposable.hpp"
+#include "GlobalNamespace/PlatformLeaderboardViewController.hpp"
 #include "GlobalNamespace/IPreviewBeatmapLevel.hpp"
-#include "GlobalNamespace/IDifficultyBeatmap.hpp"
-#include "HMUI/ViewController.hpp"
-using namespace GlobalNamespace;
+#include "UnityEngine/UI/Button.hpp"
 
-#include "shared/Models/CustomLeaderboard.hpp"
-#include "shared/Interfaces/INotifyLeaderboardActivate.hpp"
-#include "shared/Interfaces/INotifyLeaderboardChange.hpp"
-#include "shared/Interfaces/INotifyLeaderboardSet.hpp"
-#include "shared/Interfaces/INotifyLeaderboardLoad.hpp"
-using namespace LeaderboardCore;
-using namespace LeaderboardCore::Interfaces;
+#include "bsml/shared/BSML/FloatingScreen/FloatingScreen.hpp"
+#include "Models/CustomLeaderboard.hpp"
 
-#define GET_FIND_METHOD(mPtr) il2cpp_utils::il2cpp_type_check::MetadataGetter<mPtr>::get()
+#include <set>
+#include <unordered_map>
 
-#include <vector>
+DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController, HMUI::ViewController, std::vector<Il2CppClass*>({classof(::Zenject::IInitializable*), classof(::System::IDisposable*)}),
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::PlatformLeaderboardViewController*, _platformLeaderboardViewController);
+    DECLARE_INSTANCE_FIELD_PRIVATE(BSML::FloatingScreen*, _buttonsFloatingScreen);
+    DECLARE_INSTANCE_FIELD_PRIVATE(BSML::FloatingScreen*, _customPanelFloatingScreen);
+    
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::UI::Button*, _leftButton);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::UI::Button*, _rightButton);
 
-DECLARE_CLASS_CODEGEN(LeaderboardCore::UI::ViewControllers, LeaderboardNavigationButtonsController, HMUI::ViewController,
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Transform*, _containerTransform);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Vector3, _containerPosition);
+    DECLARE_INSTANCE_FIELD_PRIVATE(bool, _leaderboardLoaded);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IPreviewBeatmapLevel*, _selectedLevel);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _currentIndex);
+
+    DECLARE_OVERRIDE_METHOD(void, DidActivate, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::HMUI::ViewController::DidActivate>::get(), bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling);
+    DECLARE_OVERRIDE_METHOD(void, Initialize, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::IInitializable::Initialize>::get());
+    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+
+    DECLARE_INJECT_METHOD(void, Inject, GlobalNamespace::PlatformLeaderboardViewController* platformLeaderboardViewController);
+
     DECLARE_INSTANCE_METHOD(void, OnEnable);
-    DECLARE_OVERRIDE_METHOD(void, DidActivate, GET_FIND_METHOD(&HMUI::ViewController::DidActivate), bool firstActivation, bool addedToHeirarchy, bool screenSystemDisabling);
+    DECLARE_INSTANCE_METHOD(void, LeftButtonClick);
+    DECLARE_INSTANCE_METHOD(void, RightButtonClick);
 
+    DECLARE_INSTANCE_METHOD(void, UpdateButtonsActive);
+    DECLARE_INSTANCE_METHOD(bool, get_leftButtonActive);
+    DECLARE_INSTANCE_METHOD(bool, get_rightButtonActive);
+    DECLARE_INSTANCE_METHOD(bool, get_showDefaultLeaderboard);
+    DECLARE_INSTANCE_METHOD(bool, get_levelIsCustom);
     public:
-        std::vector<INotifyLeaderboardSet*> leaderboardSetList;
-        std::vector<INotifyLeaderboardChange*> leaderboardChangeList;
-        std::vector<INotifyLeaderboardLoad*> leaderboardLoadList;
-        std::vector<INotifyScoreSaberActive*> scoresaberActiveList;
-
         void OnScoreSaberActivated();
-
-        void OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling);
-
+        void OnLeaderboardSet(GlobalNamespace::IDifficultyBeatmap* difficultyBeatmap);
         void OnLeaderboardLoaded(bool loaded);
 
-        void OnLeaderboardChanged(const std::vector<Models::CustomLeaderboard*>& customLeaderboards);
-
-        void OnLeaderboardSet(IDifficultyBeatmap* diff);
-
-        void AddLeaderboardSet(INotifyLeaderboardSet* interface);
-
-        // void AddScoreSaberActivated(INotifyScoreSaberActive* interface);  // TODO: Uncomment if SS decides to not play nice
-
-        void AddLeaderboardChange(INotifyLeaderboardChange* interface);
-
-        void AddLeaderboardLoad(INotifyLeaderboardLoad* interface);
     private:
-        QuestUI::FloatingScreen* m_buttonsFloatingScreen;
-        QuestUI::FloatingScreen* m_panelFloatingScreen;
-        UnityEngine::Transform* m_containerTransform;
-        UnityEngine::Vector3 m_containerPos;
-        IPreviewBeatmapLevel* m_selectedLevel;
-        std::vector<Models::CustomLeaderboard*> m_customLeaderboards;
-        int m_currentIndex;
-        Models::CustomLeaderboard* m_customLeaderboard;
-
+        void OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling);
+        void SwitchToDefault(::LeaderboardCore::Models::CustomLeaderboard* lastLeaderboard = nullptr);
+        void SwitchToLastLeaderboard();
         void YeetDefault();
-
         void UnYeetDefault();
+        void RightButtonClick_overload(::LeaderboardCore::Models::CustomLeaderboard* lastLeaderboard);
+        void OnLeaderboardsChanged(const std::set<::LeaderboardCore::Models::CustomLeaderboard*>& orderedCustomLeaderboards, const std::unordered_map<std::string, ::LeaderboardCore::Models::CustomLeaderboard*>& customLeaderboardsById);
 )

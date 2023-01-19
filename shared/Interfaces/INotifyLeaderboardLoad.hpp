@@ -3,6 +3,6 @@
 namespace LeaderboardCore::Interfaces {
     class INotifyLeaderboardLoad {
     public:
-        virtual void OnLeaderboardLoaded(bool loaded) = 0;
+        virtual void OnLeaderboardLoaded() = 0;
     };
 }

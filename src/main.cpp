@@ -1,7 +1,11 @@
 #include "main.hpp"
-#include "include/Hooks/LeaderboardHook.hpp"
 #include "custom-types/shared/register.hpp"
-#include "questui/shared/QuestUI.hpp"
+#include "logger.h"
+#include "hooking.h"
+
+#include "Installers/LeaderboardCoreMenuInstaller.hpp"
+#include "lapiz/shared/zenject/Zenjector.hpp"
+#include "bsml/shared/BSML.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -12,30 +16,30 @@ Configuration& getConfig() {
     return config;
 }
 
-// Returns a logger, useful for printing debug messages
-Logger& getLogger() {
-    static Logger* logger = new Logger(modInfo);
-    return *logger;
+namespace LeaderboardCore {
+    Logger& Logging::getLogger() {
+        static Logger* logger = new Logger(modInfo);
+        return *logger;
+    }
 }
 
 // Called at the early stages of game loading
-extern "C" void setup(ModInfo& info) {
-    std::string MODID = "LeaderboardCore"; 
-    info.id = MODID;
+extern "C" void setup(ModInfo& info) { 
+    info.id = MOD_ID;
     info.version = VERSION;
     modInfo = info;
 	
     getConfig().Load(); // Load the config file
-    getLogger().info("Completed setup!");
+    INFO("Completed setup!");
 }
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     il2cpp_functions::Init();
     custom_types::Register::AutoRegister();
-    QuestUI::Init();
+    BSML::Init();
 
-    getLogger().info("Installing hooks...");
-    InstallHook();
-    getLogger().info("Installed all hooks!");
+    Hooks::InstallHooks(LeaderboardCore::Logging::getLogger());
+    auto zenjector = Lapiz::Zenject::Zenjector::Get();
+    zenjector->Install<LeaderboardCore::Installers::LeaderboardCoreMenuInstaller*>(Lapiz::Zenject::Location::Menu);
 }

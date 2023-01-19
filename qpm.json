@@ -7,13 +7,13 @@
     "version": "0.1.0",
     "url": "https://github.com/raineio/LeaderboardCore",
     "additionalData": {
-      "overrideSoName": "libLeaderboardCore.so"
+      "overrideSoName": "libleaderboardcore.so"
     }
   },
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^3.0.0",
+      "versionRange": "^3.14.0",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
@@ -27,17 +27,32 @@
     },
     {
       "id": "codegen",
-      "versionRange": "^0.22.0",
+      "versionRange": "^0.29.0",
       "additionalData": {}
     },
     {
       "id": "questui",
-      "versionRange": "^0.13.5",
+      "versionRange": "^0.17.6",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.15.9",
+      "versionRange": "^0.15.22",
+      "additionalData": {}
+    },
+    {
+      "id": "bsml",
+      "versionRange": "^0.2.4",
+      "additionalData": {}
+    },
+    {
+      "id": "paper",
+      "versionRange": "^1.2.9",
+      "additionalData": {}
+    },
+    {
+      "id": "lapiz",
+      "versionRange": "^0.1.6",
       "additionalData": {}
     }
   ],

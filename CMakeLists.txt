@@ -1,9 +1,6 @@
 # include some defines automatically made by qpm
 include(qpm_defines.cmake)
 
-# override mod id
-set(MOD_ID "#{id}")
-
 # Enable link time optimization
 # In my experience, this can be highly unstable but it nets a huge size optimization and likely performance
 # However, the instability was seen using Android.mk/ndk-build builds. With Ninja + CMake, this problem seems to have been solved.
@@ -77,3 +74,5 @@ add_custom_command(TARGET ${COMPILE_ID} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E rename stripped_lib${COMPILE_ID}.so lib${COMPILE_ID}.so
         COMMENT "Rename the stripped lib to regular"
         )
+
+include(assets_include.cmake)

@@ -1,7 +1,7 @@
 #pragma once
 
 namespace LeaderboardCore::Interfaces {
-    class INotifyScoreSaberActive {
+    class INotifyScoreSaberActivate {
     public:
         virtual void OnScoreSaberActivated() = 0;
     };
