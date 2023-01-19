@@ -42,5 +42,4 @@ extern "C" void load() {
     Hooks::InstallHooks(LeaderboardCore::Logging::getLogger());
     auto zenjector = Lapiz::Zenject::Zenjector::Get();
     zenjector->Install<LeaderboardCore::Installers::LeaderboardCoreMenuInstaller*>(Lapiz::Zenject::Location::Menu);
-    blabla
 }
