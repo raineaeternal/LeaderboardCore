@@ -11,6 +11,7 @@
 #include "GlobalNamespace/IBeatmapLevel.hpp"
 #include "GlobalNamespace/CustomPreviewBeatmapLevel.hpp"
 #include "UnityEngine/Quaternion.hpp"
+#include "UnityEngine/Vector3.hpp"
 #include "HMUI/ViewController_AnimationType.hpp"
 #include "HMUI/ViewController_DidActivateDelegate.hpp"
 
@@ -38,7 +39,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         
         auto buttonsFloatingScreenTransform = reinterpret_cast<UnityEngine::RectTransform*>(_buttonsFloatingScreen->get_transform());
         buttonsFloatingScreenTransform->SetParent(_platformLeaderboardViewController->get_transform());
-        buttonsFloatingScreenTransform->set_anchoredPosition({3.0f, 50.0f});
+        buttonsFloatingScreenTransform->set_localPosition({ 3.0f, 50.0f, 0.0f });
         buttonsFloatingScreenTransform->set_localScale({1, 1, 1});
 
         auto buttonsFloatingScreenGO = _buttonsFloatingScreen->get_gameObject();
@@ -50,7 +51,7 @@ namespace LeaderboardCore::UI::ViewControllers {
 
         auto customFloatingScreenTransform = reinterpret_cast<UnityEngine::RectTransform*>(_customPanelFloatingScreen->get_transform());
         customFloatingScreenTransform->SetParent(_platformLeaderboardViewController->get_transform());
-        customFloatingScreenTransform->set_anchoredPosition({3.0f, 50.0f});
+        customFloatingScreenTransform->set_localPosition({ 3.0f, 50.0f, 0.0f });
         customFloatingScreenTransform->set_localScale({1, 1, 1});
 
         auto customFloatingScreenGO = _customPanelFloatingScreen->get_gameObject();
