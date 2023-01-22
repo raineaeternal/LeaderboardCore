@@ -4,7 +4,7 @@
   "info": {
     "name": "LeaderboardCore",
     "id": "leaderboardcore",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "url": "https://github.com/raineio/LeaderboardCore",
     "additionalData": {
       "overrideSoName": "libleaderboardcore.so"
