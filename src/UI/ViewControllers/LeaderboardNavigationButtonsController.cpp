@@ -82,6 +82,8 @@ namespace LeaderboardCore::UI::ViewControllers {
         if (!_containerTransform || !_containerTransform->m_CachedPtr.m_value) {
             _containerTransform = _platformLeaderboardViewController->get_transform()->Find("Container");
             _containerPosition = _containerTransform->get_localPosition();
+            _headerPanelTransform = _platformLeaderboardViewController->get_transform()->Find("HeaderPanel");
+            _headerPanelPosition = _containerTransform->get_localPosition();
             OnLeaderboardLoaded(true);
         }
     }
@@ -154,6 +156,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         if (_containerTransform && _containerTransform->m_CachedPtr.m_value) {
             DEBUG("YeetDefault");
             _containerTransform->set_localPosition({-999, -999, -999});
+            _headerPanelTransform->set_localPosition({-999, -999, -999});
         }
     }
 
@@ -161,6 +164,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         if (_containerTransform && _containerTransform->m_CachedPtr.m_value) {
             DEBUG("UnYeetDefault");
             _containerTransform->set_localPosition(_containerPosition);
+            _headerPanelTransform->set_localPosition(_headerPanelPosition);
         }
     }
 

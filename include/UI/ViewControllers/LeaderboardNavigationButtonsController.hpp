@@ -25,7 +25,9 @@ DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI::ViewControllers, Leaderboa
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::UI::Button*, _rightButton);
 
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Transform*, _containerTransform);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Transform*, _headerPanelTransform);
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Vector3, _containerPosition);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Vector3, _headerPanelPosition);
     DECLARE_INSTANCE_FIELD_PRIVATE(bool, _leaderboardLoaded);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IPreviewBeatmapLevel*, _selectedLevel);
     DECLARE_INSTANCE_FIELD_PRIVATE(int, _currentIndex);
