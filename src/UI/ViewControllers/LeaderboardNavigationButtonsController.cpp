@@ -27,6 +27,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         DEBUG("DidActivate(firstActivation: {}, addedToHierarchy: {}, screenSystemEnabling: {})", firstActivation, addedToHierarchy, screenSystemEnabling);
         if (!firstActivation) return;
         BSML::parse_and_construct(IncludedAssets::LeaderboardNavigationButtons_bsml, get_transform(), this);
+        UpdateButtonsActive();
     }
 
     void LeaderboardNavigationButtonsController::Initialize() {
