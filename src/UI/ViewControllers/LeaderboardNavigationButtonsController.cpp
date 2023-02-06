@@ -83,7 +83,7 @@ namespace LeaderboardCore::UI::ViewControllers {
             _containerTransform = _platformLeaderboardViewController->get_transform()->Find("Container");
             _containerPosition = _containerTransform->get_localPosition();
             _headerPanelTransform = _platformLeaderboardViewController->get_transform()->Find("HeaderPanel");
-            _headerPanelPosition = _containerTransform->get_localPosition();
+            _headerPanelPosition = _headerPanelTransform->get_localPosition();
             OnLeaderboardLoaded(true);
         }
     }
