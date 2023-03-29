@@ -7,7 +7,11 @@
     "version": "0.0.3",
     "url": "https://github.com/raineio/LeaderboardCore",
     "additionalData": {
-      "overrideSoName": "libleaderboardcore.so"
+      "soLink": "https://github.com/raineio/LeaderboardCore/releases/download/v0.0.3/libleaderboardcore.so",
+      "debugSoLink": "https://github.com/raineio/LeaderboardCore/releases/download/v0.0.3/debug_libleaderboardcore.so",
+      "overrideSoName": "libleaderboardcore.so",
+      "modLink": "https://github.com/raineio/LeaderboardCore/releases/download/v0.0.3/LeaderboardCore.qmod",
+      "branchName": "version-v0.0.3"
     }
   },
   "dependencies": [
