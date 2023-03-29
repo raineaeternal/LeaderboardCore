@@ -27,6 +27,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         DEBUG("DidActivate(firstActivation: {}, addedToHierarchy: {}, screenSystemEnabling: {})", firstActivation, addedToHierarchy, screenSystemEnabling);
         if (!firstActivation) return;
         BSML::parse_and_construct(IncludedAssets::LeaderboardNavigationButtons_bsml, get_transform(), this);
+        UpdateButtonsActive();
     }
 
     void LeaderboardNavigationButtonsController::Initialize() {
@@ -233,8 +234,8 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     void LeaderboardNavigationButtonsController::UpdateButtonsActive() {
-        if (_leftButton && _leftButton->m_CachedPtr.m_value) _leftButton->set_interactable(get_leftButtonActive());
-        if (_rightButton && _rightButton->m_CachedPtr.m_value) _rightButton->set_interactable(get_rightButtonActive());
+        if (_leftButton && _leftButton->m_CachedPtr.m_value) _leftButton->get_gameObject()->set_active(get_leftButtonActive());
+        if (_rightButton && _rightButton->m_CachedPtr.m_value) _rightButton->get_gameObject()->set_active(get_rightButtonActive());
     }
 
     bool LeaderboardNavigationButtonsController::get_leftButtonActive() {
