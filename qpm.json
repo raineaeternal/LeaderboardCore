@@ -68,7 +68,7 @@
       "qmod": [
         "pwsh ./scripts/build.ps1 -clean",
         "qpm qmod build --isLibrary true",
-        "pwsh ./scripts/createqmod.ps1 BSML -clean"
+        "pwsh ./scripts/createqmod.ps1 LeaderboardCore -clean"
       ]
     }
   }
