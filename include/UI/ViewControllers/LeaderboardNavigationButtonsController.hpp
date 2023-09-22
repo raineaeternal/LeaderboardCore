@@ -12,6 +12,7 @@
 
 #include "bsml/shared/BSML/FloatingScreen/FloatingScreen.hpp"
 #include "Models/CustomLeaderboard.hpp"
+#include "Models/ScoreSaberLeaderboard.hpp"
 
 #include <set>
 #include <unordered_map>
@@ -51,6 +52,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI::ViewControllers, Leaderboa
         void OnScoreSaberActivated();
         void OnLeaderboardSet(GlobalNamespace::IDifficultyBeatmap* difficultyBeatmap);
         void OnLeaderboardLoaded(bool loaded);
+        LeaderboardCore::Models::ScoreSaberLeaderboard scoreSaberLeaderboard;
 
     private:
         void OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling);

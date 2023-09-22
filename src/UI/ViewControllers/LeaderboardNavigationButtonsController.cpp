@@ -61,6 +61,7 @@ namespace LeaderboardCore::UI::ViewControllers {
         customFloatingScreenGO->set_name("CustomLeaderboardPanel");
         
         Hooks::PlatformLeaderboardViewControllerEvents::didActivateEvent += {&LeaderboardNavigationButtonsController::OnLeaderboardActivated, this};
+        scoreSaberLeaderboard = Models::ScoreSaberLeaderboard(Modloader::getMods().contains("ScoreSaber"));
     }
 
     void LeaderboardNavigationButtonsController::Dispose() {
@@ -91,6 +92,7 @@ namespace LeaderboardCore::UI::ViewControllers {
 
     void LeaderboardNavigationButtonsController::OnLeaderboardActivated(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
         if (!firstActivation) return;
+        scoreSaberLeaderboard.getScoreSaberComponents(_platformLeaderboardViewController);
         _buttonsFloatingScreen->SetRootViewController(this, HMUI::ViewController::AnimationType::None);
     }
 
@@ -158,6 +160,7 @@ namespace LeaderboardCore::UI::ViewControllers {
             DEBUG("YeetDefault");
             _containerTransform->set_localPosition({-999, -999, -999});
             _headerPanelTransform->set_localPosition({-999, -999, -999});
+            scoreSaberLeaderboard.yeetComponents();
         }
     }
 
@@ -166,6 +169,7 @@ namespace LeaderboardCore::UI::ViewControllers {
             DEBUG("UnYeetDefault");
             _containerTransform->set_localPosition(_containerPosition);
             _headerPanelTransform->set_localPosition(_headerPanelPosition);
+            scoreSaberLeaderboard.unYeetComponents();
         }
     }
 
@@ -251,7 +255,7 @@ namespace LeaderboardCore::UI::ViewControllers {
     }
 
     bool LeaderboardNavigationButtonsController::get_showDefaultLeaderboard() {
-        auto result = (!get_levelIsCustom()) || Managers::CustomLeaderboardManager::orderedCustomLeaderboards.empty();
+        auto result = (!get_levelIsCustom()) || Managers::CustomLeaderboardManager::orderedCustomLeaderboards.empty() || scoreSaberLeaderboard.isScoreSaberInstalled;
         DEBUG("get_showDefaultLeaderboard -> {}", result);
         return result;
     }

@@ -35,6 +35,7 @@ extern "C" void setup(ModInfo& info) {
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
+    Modloader::requireMod("ScoreSaber");
     il2cpp_functions::Init();
     custom_types::Register::AutoRegister();
     BSML::Init();
