@@ -5,7 +5,7 @@
     "info": {
       "name": "LeaderboardCore",
       "id": "leaderboardcore",
-      "version": "0.0.1",
+      "version": "0.0.4-rc1",
       "url": "https://github.com/raineio/LeaderboardCore",
       "additionalData": {
         "overrideSoName": "libleaderboardcore.so"
@@ -52,7 +52,27 @@
         "additionalData": {}
       }
     ],
-    "workspace": null
+    "workspace": {
+      "scripts": {
+        "build": [
+          "pwsh ./scripts/build.ps1"
+        ],
+        "clean": [
+          "pwsh ./scripts/build.ps1 -clean"
+        ],
+        "copy": [
+          "pwsh ./scripts/copy.ps1"
+        ],
+        "log": [
+          "pwsh ./scripts/log.ps1"
+        ],
+        "qmod": [
+          "pwsh ./scripts/build.ps1 -clean",
+          "qpm qmod build --isLibrary true",
+          "pwsh ./scripts/createqmod.ps1 LeaderboardCore -clean"
+        ]
+      }
+    }
   },
   "restoredDependencies": [
     {
