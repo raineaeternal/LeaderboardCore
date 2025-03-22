@@ -18,4 +18,5 @@ namespace LeaderboardCore::API {
         /// </summary>
         void NotifyLeaderboardSet();
     }
+
 }
