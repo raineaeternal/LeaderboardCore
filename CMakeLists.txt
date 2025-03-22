@@ -113,3 +113,5 @@ foreach(a_file ${a_list})
                 COMMAND ${CMAKE_COMMAND} -E copy ${a_file} debug/${file}
                 COMMENT "Copy a files for ndk stack")
 endforeach()
+
+include(assets_include.cmake)
