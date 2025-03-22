@@ -71,10 +71,86 @@
         "id": "paper2_scotland2",
         "versionRange": "^4.6.1",
         "additionalData": {}
+      },
+      {
+        "id": "lapiz",
+        "versionRange": "^0.2.18",
+        "additionalData": {}
+      },
+      {
+        "id": "custom-types",
+        "versionRange": "^0.18.2",
+        "additionalData": {}
       }
     ]
   },
   "restoredDependencies": [
+    {
+      "dependency": {
+        "id": "paper2_scotland2",
+        "versionRange": "=4.6.1",
+        "additionalData": {
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/libpaper2_scotland2.so",
+          "overrideSoName": "libpaper2_scotland2.so",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/paper2_scotland2.qmod",
+          "branchName": "version/v4_6_1",
+          "compileOptions": {
+            "systemIncludes": [
+              "shared/utfcpp/source"
+            ]
+          },
+          "cmake": false
+        }
+      },
+      "version": "4.6.1"
+    },
+    {
+      "dependency": {
+        "id": "libil2cpp",
+        "versionRange": "=0.4.0",
+        "additionalData": {
+          "headersOnly": true,
+          "compileOptions": {
+            "systemIncludes": [
+              "il2cpp/external/baselib/Include",
+              "il2cpp/external/baselib/Platforms/Android/Include"
+            ]
+          }
+        }
+      },
+      "version": "0.4.0"
+    },
+    {
+      "dependency": {
+        "id": "custom-types",
+        "versionRange": "=0.18.2",
+        "additionalData": {
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/debug_libcustom-types.so",
+          "overrideSoName": "libcustom-types.so",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/CustomTypes.qmod",
+          "branchName": "version/v0_18_2",
+          "compileOptions": {
+            "cppFlags": [
+              "-Wno-invalid-offsetof"
+            ]
+          },
+          "cmake": true
+        }
+      },
+      "version": "0.18.2"
+    },
+    {
+      "dependency": {
+        "id": "sombrero",
+        "versionRange": "=0.1.43",
+        "additionalData": {
+          "headersOnly": true,
+          "branchName": "version/v0_1_43"
+        }
+      },
+      "version": "0.1.43"
+    },
     {
       "dependency": {
         "id": "bs-cordl",
@@ -101,22 +177,18 @@
     },
     {
       "dependency": {
-        "id": "paper2_scotland2",
-        "versionRange": "=4.6.1",
+        "id": "lapiz",
+        "versionRange": "=0.2.18",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/libpaper2_scotland2.so",
-          "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/paper2_scotland2.qmod",
-          "branchName": "version/v4_6_1",
-          "compileOptions": {
-            "systemIncludes": [
-              "shared/utfcpp/source"
-            ]
-          },
-          "cmake": false
+          "soLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.18/liblapiz.so",
+          "debugSoLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.18/debug_liblapiz.so",
+          "overrideSoName": "liblapiz.so",
+          "modLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.18/Lapiz.qmod",
+          "branchName": "version/v0_2_18",
+          "cmake": true
         }
       },
-      "version": "4.6.1"
+      "version": "0.2.18"
     },
     {
       "dependency": {
@@ -132,22 +204,6 @@
         }
       },
       "version": "6.4.1"
-    },
-    {
-      "dependency": {
-        "id": "libil2cpp",
-        "versionRange": "=0.4.0",
-        "additionalData": {
-          "headersOnly": true,
-          "compileOptions": {
-            "systemIncludes": [
-              "il2cpp/external/baselib/Include",
-              "il2cpp/external/baselib/Platforms/Android/Include"
-            ]
-          }
-        }
-      },
-      "version": "0.4.0"
     },
     {
       "dependency": {

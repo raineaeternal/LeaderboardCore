@@ -70,6 +70,16 @@
       "id": "paper2_scotland2",
       "versionRange": "^4.6.1",
       "additionalData": {}
+    },
+    {
+      "id": "lapiz",
+      "versionRange": "^0.2.18",
+      "additionalData": {}
+    },
+    {
+      "id": "custom-types",
+      "versionRange": "^0.18.2",
+      "additionalData": {}
     }
   ]
 }
