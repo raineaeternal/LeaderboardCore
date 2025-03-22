@@ -25,16 +25,14 @@ if(CMAKE_ANDROID_NDK MATCHES " ")
     message(FATAL_ERROR "CMAKE_ANDROID_NDK contains a space! Please remove it!")
 endif()
 
-
 # Quest is armv8-64
 # Uses Android 12-14 now
-
 set(ANDROID_PLATFORM 24)
 set(ANDROID_ABI arm64-v8a)
 set(ANDROID_STL c++_static)
 set(ANDROID_USE_LEGACY_TOOLCHAIN_FILE OFF)
 
-#TODO: Fix this warning
+# TODO: Fix this warning
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".+")
     message(WARNING "CMAKE_TOOLCHAIN_FILE already defined, overwriting! ${CMAKE_TOOLCHAIN_FILE}")
 endif()

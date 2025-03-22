@@ -4,12 +4,12 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "#{name}",
-    "id": "#{id}",
+    "name": "LeaderboardCore",
+    "id": "leaderboardcore",
     "version": "0.1.0",
     "url": null,
     "additionalData": {
-      "overrideSoName": "lib#{id}.so",
+      "overrideSoName": "libLeaderboardCore.so",
       "cmake": true
     }
   },
@@ -46,7 +46,7 @@
       "./extern/libs"
     ],
     "qmodIncludeFiles": [],
-    "qmodOutput": "./#{name}.qmod"
+    "qmodOutput": "./LeaderboardCore.qmod"
   },
   "dependencies": [
     {
@@ -62,13 +62,13 @@
       }
     },
     {
-      "id": "paper",
-      "versionRange": "^3.0.0",
+      "id": "bs-cordl",
+      "versionRange": "^4030.0.0",
       "additionalData": {}
     },
     {
-      "id": "bs-cordl",
-      "versionRange": "^4030.0.0",
+      "id": "paper2_scotland2",
+      "versionRange": "^4.6.1",
       "additionalData": {}
     }
   ]
