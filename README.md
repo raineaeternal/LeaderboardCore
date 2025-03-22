@@ -1,6 +1,9 @@
-# LeaderboardCore
+# #{name}
 
+#{description}
 
+Use `qpm s build` to build
+Same goes for `qpm s copy` and `qpm s qmod`
 
 ## Credits
 

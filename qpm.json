@@ -1,56 +1,18 @@
 {
+  "$schema": "https://raw.githubusercontent.com/QuestPackageManager/QPM.Package/refs/heads/main/qpm.schema.json",
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "LeaderboardCore",
-    "id": "leaderboardcore",
-    "version": "0.0.1",
-    "url": "https://github.com/raineio/LeaderboardCore",
+    "name": "#{name}",
+    "id": "#{id}",
+    "version": "0.1.0",
+    "url": null,
     "additionalData": {
-      "overrideSoName": "libleaderboardcore.so"
+      "overrideSoName": "lib#{id}.so",
+      "cmake": true
     }
   },
-  "dependencies": [
-    {
-      "id": "beatsaber-hook",
-      "versionRange": "^3.14.0",
-      "additionalData": {
-        "extraFiles": [
-          "src/inline-hook"
-        ]
-      }
-    },
-    {
-      "id": "modloader",
-      "versionRange": "^1.2.3",
-      "additionalData": {}
-    },
-    {
-      "id": "custom-types",
-      "versionRange": "^0.15.23",
-      "additionalData": {}
-    },
-    {
-      "id": "bsml",
-      "versionRange": "^0.3.1",
-      "additionalData": {}
-    },
-    {
-      "id": "paper",
-      "versionRange": "<=1.2.9",
-      "additionalData": {}
-    },
-    {
-      "id": "codegen",
-      "versionRange": "^0.33.0",
-      "additionalData": {}
-    },
-    {
-      "id": "lapiz",
-      "versionRange": "^0.1.11",
-      "additionalData": {}
-    }
-  ],
   "workspace": {
     "scripts": {
       "build": [
@@ -60,16 +22,54 @@
         "pwsh ./scripts/build.ps1 -clean"
       ],
       "copy": [
-        "pwsh ./scripts/copy.ps1"
+        "pwsh ./scripts/copy.ps1 $0:?"
       ],
-      "log": [
-        "pwsh ./scripts/log.ps1"
+      "logcat": [
+        "pwsh ./scripts/start-logging.ps1"
       ],
       "qmod": [
-        "pwsh ./scripts/build.ps1 -clean",
-        "qpm qmod build --isLibrary true",
-        "pwsh ./scripts/createqmod.ps1 LeaderboardCore -clean"
+        "pwsh ./scripts/build.ps1",
+        "pwsh ./scripts/createqmod.ps1"
+      ],
+      "restart": [
+        "pwsh ./scripts/restart-game.ps1"
+      ],
+      "stack": [
+        "pwsh ./scripts/ndk-stack.ps1"
+      ],
+      "tomb": [
+        "pwsh ./scripts/pull-tombstone.ps1"
       ]
+    },
+    "qmodIncludeDirs": [
+      "./build",
+      "./extern/libs"
+    ],
+    "qmodIncludeFiles": [],
+    "qmodOutput": "./#{name}.qmod"
+  },
+  "dependencies": [
+    {
+      "id": "beatsaber-hook",
+      "versionRange": "^6.4.1",
+      "additionalData": {}
+    },
+    {
+      "id": "scotland2",
+      "versionRange": "^0.1.4",
+      "additionalData": {
+        "includeQmod": false
+      }
+    },
+    {
+      "id": "paper",
+      "versionRange": "^3.0.0",
+      "additionalData": {}
+    },
+    {
+      "id": "bs-cordl",
+      "versionRange": "^4030.0.0",
+      "additionalData": {}
     }
-  }
+  ]
 }
