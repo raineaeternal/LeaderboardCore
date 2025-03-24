@@ -1,22 +1,25 @@
 #pragma once
 
+#include "_config.hpp"
+#include <string>
+
 namespace LeaderboardCore::API {
     namespace Registration {
         /// <summary>
         /// Register a leaderboard with LeaderboardCore.
         /// </summary>
-        void RegisterLeaderboard(MOD_ID const& modID);
+        LBCORE_EXPORT_FUNC void RegisterLeaderboard(std::string modId = MOD_ID);
 
         /// <summary>
         /// Unregister a leaderboard with LeaderboardCore.
         /// </summary>
-        void UnregisterLeaderboard(MOD_ID const& modID);
+        LBCORE_EXPORT_FUNC void UnregisterLeaderboard(std::string modId = MOD_ID);
     }
     namespace Leaderboard {
         /// <summary>
         /// Notify subcribers that the leaderboard has been set.
         /// </summary>
-        void NotifyLeaderboardSet();
+        LBCORE_EXPORT_FUNC void NotifyLeaderboardSet();
     }
 
 }

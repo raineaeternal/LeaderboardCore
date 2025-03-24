@@ -1,4 +1,7 @@
 #include "main.hpp"
+#include "UI/LeaderboardNavigationController.hpp"
+#include "UI/CustomPlatformLeaderboardViewController.hpp"
+#include "lapiz/shared/zenject/Location.hpp"
 #include "logging.hpp"
 #include "_config.hpp"
 
