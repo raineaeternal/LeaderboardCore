@@ -1,4 +1,7 @@
 #include "main.hpp"
+#include "UI/LeaderboardNavigationController.hpp"
+#include "UI/PlatformLeaderboardViewController.hpp"
+#include "lapiz/shared/zenject/Location.hpp"
 #include "logging.hpp"
 #include "_config.hpp"
 
@@ -6,8 +9,6 @@
 
 #include "lapiz/shared/zenject/Zenjector.hpp"
 #include "lapiz/shared/utilities/ZenjectExtensions.hpp"
-
-#include "Installers/MenuInstaller.hpp"
 
 using namespace LeaderboardCore;
 
@@ -29,7 +30,10 @@ LBCORE_EXPORT_FUNC void late_load() noexcept {
 
   auto zenjector = Zenjector::Get();
 
-  zenjector->Install<Installers::MenuInstaller*>(Location::Menu);
+  zenjector->Install(Location::Menu, [](::Zenject::DiContainer *container) {
+    container->BindInterfacesAndSelfTo<UI::CustomPlatformLeaderboardViewController*>();
+    container->BindInterfacesAndSelfTo<UI::LeaderboardNavigationController*>();
+  });
 
   INFO("Installing hooks...");
 
