@@ -80,6 +80,11 @@
       "id": "custom-types",
       "versionRange": "^0.18.2",
       "additionalData": {}
+    },
+    {
+      "id": "bsml",
+      "versionRange": "^0.4.50",
+      "additionalData": {}
     }
   ]
 }

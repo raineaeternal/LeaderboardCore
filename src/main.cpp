@@ -5,9 +5,14 @@
 #include "scotland2/shared/modloader.h"
 
 #include "lapiz/shared/zenject/Zenjector.hpp"
+
+#include "UI/LeaderboardNavigationController.hpp"
+#include "UI/CustomPlatformLeaderboardViewController.hpp"
+#include "Zenject/ConcreteIdBinderGeneric_1.hpp"
+#include "Zenject/DiContainer.hpp"
 #include "lapiz/shared/utilities/ZenjectExtensions.hpp"
 
-#include "Installers/MenuInstaller.hpp"
+#include "bsml/shared/BSML.hpp"
 
 using namespace LeaderboardCore;
 
@@ -15,23 +20,25 @@ static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 
 // Called at the early stages of game loading
 LBCORE_EXPORT_FUNC void setup(CModInfo *info) noexcept {
-  *info = modInfo.to_c();
+    *info = modInfo.to_c();
 
-  INFO("Completed setup!");
+    INFO("Completed setup!");
 }
 
 // Called later on in the game loading - a good time to install function hooks
 LBCORE_EXPORT_FUNC void late_load() noexcept {
-  il2cpp_functions::Init();
+    il2cpp_functions::Init();
 
-  using namespace Lapiz::Zenject;
-  using namespace Lapiz::Zenject::ZenjectExtensions;
+    BSML::Init();
+    custom_types::Register::AutoRegister();
 
-  auto zenjector = Zenjector::Get();
+    using namespace Lapiz::Zenject;
+    using namespace Lapiz::Zenject::ZenjectExtensions;
 
-  zenjector->Install<Installers::MenuInstaller*>(Location::Menu);
+    auto zenjector = Zenjector::Get();
 
-  INFO("Installing hooks...");
-
-  INFO("Installed all hooks!");
+    zenjector->Install(Location::Menu, [](Zenject::DiContainer* container) {
+        FromNewComponentAsViewController(container->Bind<UI::LeaderboardNavigationController*>())->AsSingle();
+        FromNewComponentAsViewController(container->BindInterfacesAndSelfTo<UI::CustomPlatformLeaderboardViewController*>())->AsSingle();
+    });
 }
