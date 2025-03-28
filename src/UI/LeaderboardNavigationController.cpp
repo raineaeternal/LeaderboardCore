@@ -8,19 +8,30 @@ DEFINE_TYPE(LeaderboardCore::UI, LeaderboardNavigationController);
 
 namespace LeaderboardCore::UI {
 
+    void LeaderboardNavigationController::Initialise() {
+        DEBUG("LeaderboardNavigationController::Initialise");
+        
+        _orientation = HMUI::NavigationController_Orientation::Vertical;
+        _viewControllersSeparator = -25;
+    }
+
+    void LeaderboardNavigationController::PostParse() {
+
+    }
+
     void LeaderboardNavigationController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
         DEBUG("LeaderboardNavigationController::DidActivate");
         if (firstActivation) {
             BSML::parse_and_construct(IncludedAssets::LeaderboardNavigationButtons_bsml, transform, this);
         }
         if (addedToHierarchy) {
-            // SetChildViewControllers(ArrayW<HMUI::ViewController*>({customPlatformLeaderboardViewController, customPanelViewController}));
+            // SetChildViewControllers(ArrayW<HMUI::ViewController*>({panel, lb}));
         }
     }
     
     void LeaderboardNavigationController::DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling) {
+        DEBUG("LeaderboardNavigationController::DidDeactivate");
         if (removedFromHierarchy) {
-            DEBUG("LeaderboardNavigationController::DidDeactivate");
             // ClearChildViewControllers();
         }
     }
@@ -35,6 +46,18 @@ namespace LeaderboardCore::UI {
         // auto result = _currentIndex < Managers::CustomLeaderboardManager::orderedCustomLeaderboards.size() && _leaderboardLoaded && get_levelIsCustom();
         // DEBUG("get_rightButtonActive -> {}", result);
         return true;
+    }
+
+    void LeaderboardNavigationController::LeftButtonClick() {
+        DEBUG("LeaderboardNavigationController::LeftButtonClick");
+    }
+
+    void LeaderboardNavigationController::RightButtonClick() {
+        DEBUG("LeaderboardNavigationController::RightButtonClick");
+    }
+
+    void LeaderboardNavigationController::Dispose() {
+        DEBUG("LeaderboardNavigationController::Dispose");
     }
 
 }

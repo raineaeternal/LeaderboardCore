@@ -21,6 +21,9 @@ DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI, CustomPlatformLeaderboardV
     DECLARE_OVERRIDE_METHOD_MATCH(void, Initialise, &Zenject::IInitializable::Initialize);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &System::IDisposable::Dispose);
 
+    DECLARE_INSTANCE_METHOD(void, PostParse);
+
+    DECLARE_INSTANCE_FIELD(UnityEngine::GameObject*, noLeaderboard);
     DECLARE_INSTANCE_FIELD(LeaderboardNavigationController*, leaderboardNavigationController);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SoloFreePlayFlowCoordinator*, soloFreePlayFlowCoordinator);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::PlatformLeaderboardViewController*, platformLeaderboardViewController);

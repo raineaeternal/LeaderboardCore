@@ -1,0 +1,9 @@
+<bg id="noLeaderboard" xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/RedBrumbler/Quest-BSML-Docs/gh-pages/schema.xsd'>
+  
+    <horizontal pref-width="95" pref-height="8" anchor-pos-y="41.5" horizontal-fit="PreferredSize" background="title-gradient" background-color="#FFFFFFFF" background-color0="#FFFFFF33" background-color1="#FFFFFF00">
+        <text text="LEADERBOARDN'T" font-size="6" align="Midline" italics="true"/>
+    </horizontal>
+  
+    <text anchor-pos-y="5.5" align="Center" italics="true" text="you currently have no leaderboards installed ;("/>
+
+</bg>

@@ -46,5 +46,6 @@ struct IncludedAsset {
 namespace IncludedAssets {
 
 	DECLARE_FILE(LeaderboardNavigationButtons_bsml)
+	DECLARE_FILE(PlaceholderLeaderboard_bsml)
 
 }

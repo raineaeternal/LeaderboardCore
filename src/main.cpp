@@ -41,7 +41,7 @@ LBCORE_EXPORT_FUNC void late_load() noexcept {
     auto zenjector = Zenjector::Get();
 
     zenjector->Install(Location::Menu, [](Zenject::DiContainer* container) {
-        FromNewComponentAsViewController(container->Bind<UI::LeaderboardNavigationController*>())->AsSingle();
+        FromNewComponentAsViewController(container->BindInterfacesAndSelfTo<UI::LeaderboardNavigationController*>())->AsSingle();
         FromNewComponentAsViewController(container->BindInterfacesAndSelfTo<UI::CustomPlatformLeaderboardViewController*>())->AsSingle();
     });
 }
