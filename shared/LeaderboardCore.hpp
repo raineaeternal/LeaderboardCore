@@ -1,7 +1,7 @@
 #pragma once
 
 #include "_config.hpp"
-#include "scotland2/shared/modloader.h"
+#include "scotland2/shared/loader.hpp"
 #include <set>
 
 namespace LeaderboardCore::API {
@@ -14,11 +14,11 @@ namespace LeaderboardCore::API {
 
             LBCORE_EXPORT void Unregister(const modloader::ModInfo& modInfo);
 
-            LBCORE_EXPORT void GetLeaderboards();
+            LBCORE_EXPORT const std::set<const modloader::ModInfo *>& GetLeaderboards();
 
             
         private:
-            std::set<modloader::ModInfo *> _registeredLeaderboards;
+            std::set<const modloader::ModInfo *> _registeredLeaderboards;
     };
 
 }
