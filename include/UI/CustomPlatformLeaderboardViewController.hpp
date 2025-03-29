@@ -18,7 +18,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(LeaderboardCore::UI, CustomPlatformLeaderboardV
     DECLARE_OVERRIDE_METHOD_MATCH(void, SetData, &GlobalNamespace::LeaderboardViewController::SetData, ByRef<GlobalNamespace::BeatmapKey> beatmapKey);
     DECLARE_OVERRIDE_METHOD_MATCH(void, RefreshLevelStats, &GlobalNamespace::LeaderboardViewController::RefreshLevelStats);
 
-    DECLARE_OVERRIDE_METHOD_MATCH(void, Initialise, &Zenject::IInitializable::Initialize);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &Zenject::IInitializable::Initialize);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &System::IDisposable::Dispose);
 
     DECLARE_INSTANCE_METHOD(void, PostParse);
