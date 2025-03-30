@@ -8,6 +8,8 @@
 namespace LeaderboardCore::API {
     class Registration {
         public:
+            static Registration get_instance();
+
             /// <summary>
             /// Register a leaderboard with LeaderboardCore.
             /// </summary>

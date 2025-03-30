@@ -4,6 +4,12 @@
 #include <optional>
 
 namespace LeaderboardCore::API {
+    static Registration Instance;
+
+    Registration Registration::get_instance() {
+        return Instance;
+    }
+
     void Registration::Register(const modloader::ModInfo &modInfo, CustomLeaderboard *leaderboard) {
         DEBUG("Registering leaderboard mod: {} with version: {}", modInfo.id, modInfo.version);
         _registeredLeaderboards.emplace(&modInfo, leaderboard);
