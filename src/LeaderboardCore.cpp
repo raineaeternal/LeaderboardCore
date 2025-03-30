@@ -1,12 +1,12 @@
 #include "LeaderboardCore.hpp"
 #include "logging.hpp"
 
-#include <vector>
+#include <optional>
 
 namespace LeaderboardCore::API {
-    void Registration::Register(const modloader::ModInfo &modInfo) {
+    void Registration::Register(const modloader::ModInfo &modInfo, CustomLeaderboard *leaderboard) {
         DEBUG("Registering leaderboard mod: {} with version: {}", modInfo.id, modInfo.version);
-        _registeredLeaderboards.emplace(&modInfo);
+        _registeredLeaderboards.emplace(&modInfo, leaderboard);
     }
 
     void Registration::Unregister(const modloader::ModInfo &modInfo) {
@@ -14,7 +14,16 @@ namespace LeaderboardCore::API {
         _registeredLeaderboards.erase(&modInfo);
     }
 
-    const std::set<const modloader::ModInfo *>& Registration::GetLeaderboards() {
+    const std::map<const modloader::ModInfo *, const CustomLeaderboard *>& Registration::GetLeaderboards() const {
         return _registeredLeaderboards;
+    }
+
+    std::optional<const CustomLeaderboard *> Registration::GetCustomLeaderboardFromModInfo(std::string_view modId) {
+        for (const auto &[modInfo, regLeaderboard] : _registeredLeaderboards) {
+            if (modInfo->id == modId) {
+                return regLeaderboard;
+            }
+        }
+        return std::nullopt;
     }
 }

@@ -16,7 +16,7 @@ using namespace GlobalNamespace;
 
 namespace LeaderboardCore::UI {
 
-    void CustomPlatformLeaderboardViewController::Initialise() {
+    void CustomPlatformLeaderboardViewController::Initialize() {
         DEBUG("CustomPlatformLeaderboardViewController::Initialise");
         
         platformLeaderboardViewController = soloFreePlayFlowCoordinator->_platformLeaderboardViewController;

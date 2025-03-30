@@ -48,7 +48,6 @@ namespace LeaderboardCore::UI {
         return true;
     }
 
-<<<<<<< Updated upstream
     void LeaderboardNavigationController::LeftButtonClick() {
         DEBUG("LeaderboardNavigationController::LeftButtonClick");
     }
@@ -62,6 +61,3 @@ namespace LeaderboardCore::UI {
     }
 
 }
-=======
-}
->>>>>>> Stashed changes
